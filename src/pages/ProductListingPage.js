@@ -1,8 +1,15 @@
 import { Component } from "react";
 
+import CategoryItem from "../components/CategoryItem";
+
 class ProductListingPage extends Component {
   render() {
-    return <div>This is the Product Listing Page!</div>;
+    return (
+      <div>
+        <h1>Category name</h1>
+        <CategoryItem />
+      </div>
+    );
   }
 }
 
