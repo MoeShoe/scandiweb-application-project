@@ -18,7 +18,7 @@ class App extends Component {
           <CartPage />
         </Route>
         <Route path="/">
-          <p>404!</p>
+          <div>404!</div>
         </Route>
       </Switch>
     );
