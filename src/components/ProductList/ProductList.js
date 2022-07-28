@@ -24,6 +24,7 @@ class ProductList extends Component {
               }`}
               // the first pic in the gallery is used by default
               img={prod.gallery.at(0)}
+              inStock={prod.inStock}
               key={prod.id}
             />
           ))}
