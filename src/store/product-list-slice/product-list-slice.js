@@ -2,7 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const productsInitialState = {
   category: { currentCategory: "", listOfCategories: [] },
-  currency: { currentCurrency: "", listOfCurrencies: [] },
+  currency: {
+    currentCurrency: { label: "", symbol: "" },
+    listOfCurrencies: [],
+  },
   products: [],
 };
 
@@ -20,7 +23,7 @@ const productListSlice = createSlice({
     setProductList(state, action) {
       state.category.currentCategory = action.payload.category;
       state.products = action.payload.products;
-      // console.log(state.products);
+      console.log(state.products);
     },
 
     setCurrency(state, action) {

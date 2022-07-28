@@ -17,7 +17,11 @@ class ProductList extends Component {
           {this.props.products.map((prod) => (
             <ProductItem
               name={prod.name}
-              amount={prod.prices.amount}
+              amount={`${this.props.currency.symbol}${
+                prod.prices.find(
+                  (amt) => amt.currency.label === this.props.currency.label
+                ).amount
+              }`}
               key={prod.id}
             />
           ))}
@@ -30,6 +34,7 @@ class ProductList extends Component {
 const mapStateToProps = (state) => ({
   products: state.productList.products,
   category: state.productList.category.currentCategory,
+  currency: state.productList.currency.currentCurrency,
 });
 const mapDispatchToProps = (dispatch) => ({});
 
