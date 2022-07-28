@@ -18,8 +18,9 @@ class NavBar extends Component {
     return (
       <div className={styles["nav-bar-container"]}>
         {/* Categories */}
-        {/* I considered making categories render dynamically from the API but i
-        decided against it to avoid over-engineering */}
+        {/* I considered making categories render dynamically from the API  to improve scalability 
+        but i decided against it to avoid over-engineering, my thought process was that in a real
+        life project, if we decide to add more categories, we'll have to redesign the categories select UI */}
         <div
           className={`${styles["container"]} ${styles["categories-container"]}`}
         >

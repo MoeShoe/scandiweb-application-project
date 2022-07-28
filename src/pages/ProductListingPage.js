@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 
-import CategoryItem from "../components/ProductItem/ProductItem";
+import ProductList from "../components/ProductList/ProductList";
 import fetchProductList from "../store/product-list-slice/product-list-action-thunk";
 
 class ProductListingPage extends Component {
@@ -10,26 +10,15 @@ class ProductListingPage extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <h1>Category name</h1>
-        {this.props.productList.map((product) => (
-          <CategoryItem key={product.id} />
-        ))}
-      </div>
-    );
+    return <ProductList />;
   }
 }
 
-const mapStateToProps = (state) => ({
-  productList: state.productList.products,
-});
-
 const mapDispatchToProps = (dispatch) => ({
   getProductList() {
-    // default category displayed when the page first loads is all
+    // default category displayed when the page first loads is "all"
     dispatch(fetchProductList("all"));
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductListingPage);
+export default connect(null, mapDispatchToProps)(ProductListingPage);
