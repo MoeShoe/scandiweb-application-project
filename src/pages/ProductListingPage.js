@@ -2,7 +2,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 
 import CategoryItem from "../components/ProductItem/ProductItem";
-import fetchProductList from "../store/product-list/product-list-action-thunk";
+import fetchProductList from "../store/product-list-slice/product-list-action-thunk";
 
 class ProductListingPage extends Component {
   componentDidMount() {
@@ -30,6 +30,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getProductList() {
+      // default category displayed when the page first loads is all
       dispatch(fetchProductList("all"));
     },
   };

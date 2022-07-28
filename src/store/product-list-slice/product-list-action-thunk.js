@@ -25,7 +25,12 @@ const fetchProductList = (category) => async (dispatch) => {
 
     const data = await request(API_ENDPOINT, query);
 
-    dispatch(productListActions.setProductList(data.category.products));
+    dispatch(
+      productListActions.setProductList({
+        category,
+        products: data.category.products,
+      })
+    );
   } catch (err) {
     /* very basic error handling without reflecting error state to 
     the UI because it wasn't required in the assignment */
