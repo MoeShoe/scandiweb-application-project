@@ -6,7 +6,7 @@ import { ReactComponent as Logo } from "../../assets/web-app-logo.svg";
 import { ReactComponent as Cart } from "../../assets/cart.svg";
 import { productListActions } from "../../store/product-list-slice/product-list-slice";
 import { fetchProductList } from "../../store/product-list-slice/product-list-action-thunks";
-import CurrencyToolTip from "./CurrencyToolTip";
+import CurrencyToolTip from "./CurrencyOverlay";
 
 class NavBar extends Component {
   constructor() {
@@ -73,11 +73,13 @@ class NavBar extends Component {
             onClick={this.currencyClickHandler.bind(this)}
           >
             {this.props.currentCurrency.symbol}{" "}
-            {!this.state.showCurrencyTooltip ? (
-              <span>&#8964;</span>
-            ) : (
-              <span>&#8963;</span>
-            )}
+            <span
+              className={`${
+                this.state.showCurrencyTooltip ? styles["flip-symbol"] : ""
+              }`}
+            >
+              &#8964;
+            </span>
             {this.state.showCurrencyTooltip && (
               <CurrencyToolTip
                 listOfCurrencies={this.props.listOfCurrencies}

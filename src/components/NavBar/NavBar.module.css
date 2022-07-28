@@ -76,6 +76,10 @@
   transform: translate(4px, -2px);
 }
 
+.flip-symbol {
+  transform: translate(4px, 5px) rotate(180deg) !important;
+}
+
 .action g {
   fill: #43464e;
 }
