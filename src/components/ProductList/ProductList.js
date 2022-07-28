@@ -22,6 +22,8 @@ class ProductList extends Component {
                   (amt) => amt.currency.label === this.props.currency.label
                 ).amount
               }`}
+              // the first pic in the gallery is used by default
+              img={prod.gallery.at(0)}
               key={prod.id}
             />
           ))}

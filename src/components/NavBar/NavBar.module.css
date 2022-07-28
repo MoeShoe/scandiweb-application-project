@@ -69,10 +69,14 @@
   cursor: pointer;
 }
 
-/* special case added to match design */
+/* special cases added to match design */
 .action span {
   display: inline-block;
   transform: translate(4px, -2px);
+}
+
+.action g {
+  fill: #43464e;
 }
 
 .action:hover,

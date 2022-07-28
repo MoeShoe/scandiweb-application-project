@@ -53,6 +53,7 @@ const fetchProductList = (category) => async (dispatch) => {
               amount
             }
             gallery
+            inStock
           }
         }
       }  
