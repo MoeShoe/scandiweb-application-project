@@ -27,7 +27,6 @@
   padding: 0 15px;
   margin: 0 20px;
   cursor: pointer;
-  transition: color 400ms;
 }
 
 .category:hover {
@@ -48,6 +47,10 @@
   justify-content: center;
 }
 
+.web-app-logo-container svg {
+  cursor: pointer;
+}
+
 .actions-container {
   justify-content: flex-end;
   margin-right: 60px;
@@ -59,17 +62,24 @@
   font-size: 18px;
   margin: 0 10px;
   cursor: pointer;
-  transition: color 400ms;
 }
 
 /* special case added to match design */
 .action span {
   display: inline-block;
   transform: translate(4px, -2px);
-  transition: color 400ms;
 }
 
 .action:hover,
-.action:hover span {
+.action:hover span,
+.action:hover g {
   color: #ff4800;
+  fill: #ff4800;
+}
+
+.category,
+.action,
+.action span,
+.action g {
+  transition: color 350ms, fill 150ms;
 }
