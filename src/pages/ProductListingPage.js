@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 
-import CategoryItem from "../components/CategoryItem";
-import fetchProductList from "../store/product-list-action-thunk";
+import CategoryItem from "../components/ProductItem/ProductItem";
+import fetchProductList from "../store/product-list/product-list-action-thunk";
 
 class ProductListingPage extends Component {
   componentDidMount() {

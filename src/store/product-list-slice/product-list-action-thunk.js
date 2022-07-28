@@ -1,6 +1,6 @@
 import { request, gql } from "graphql-request";
 
-import { API_ENDPOINT } from "../constants/constants";
+import { API_ENDPOINT } from "../../constants/constants";
 import { productListActions } from "./product-list-slice";
 
 const fetchProductList = (category) => async (dispatch) => {
@@ -22,8 +22,9 @@ const fetchProductList = (category) => async (dispatch) => {
 }
 }  
 `;
+
     const data = await request(API_ENDPOINT, query);
-    console.log(data);
+
     dispatch(productListActions.setProductList(data.category.products));
   } catch (err) {
     /* very basic error handling without reflecting error state to 

@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import styles from './CategoryItem.module.css';
+import styles from "./ProductItem.module.css";
 
 class CategoryItem extends Component {
   render() {
