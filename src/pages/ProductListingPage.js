@@ -21,19 +21,15 @@ class ProductListingPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    productList: state.productList.products,
-  };
-};
+const mapStateToProps = (state) => ({
+  productList: state.productList.products,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getProductList() {
-      // default category displayed when the page first loads is all
-      dispatch(fetchProductList("all"));
-    },
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  getProductList() {
+    // default category displayed when the page first loads is all
+    dispatch(fetchProductList("all"));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductListingPage);

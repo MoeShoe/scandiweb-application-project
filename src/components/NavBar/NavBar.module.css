@@ -1,3 +1,8 @@
+:root {
+  --active-color: #5ece7b;
+  --hover-color: #ff4800;
+}
+
 .nav-bar-container {
   height: 80px;
   width: 100%;
@@ -30,17 +35,17 @@
 }
 
 .category:hover {
-  color: #ff4800;
+  color: var(--hover-color);
 }
 
 .category-active {
   font-weight: 600;
-  color: #5ece7b;
-  border-bottom: solid 2px #5ece7b;
+  color: var(--active-color);
+  box-shadow: 0 2px 0 var(--active-color);
 }
 
 .category-active:hover {
-  color: #5ece7b !important;
+  color: var(--active-color) !important;
 }
 
 .web-app-logo-container {
@@ -73,8 +78,8 @@
 .action:hover,
 .action:hover span,
 .action:hover g {
-  color: #ff4800;
-  fill: #ff4800;
+  color: var(--hover-color);
+  fill: var(--hover-color);
 }
 
 .category,

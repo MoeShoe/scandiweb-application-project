@@ -1,29 +1,63 @@
 import { Component } from "react";
+import { connect } from "react-redux";
 
 import styles from "./NavBar.module.css";
 import { ReactComponent as Logo } from "../../assets/web-app-logo.svg";
 import { ReactComponent as Cart } from "../../assets/cart.svg";
+import fetchProductList from "../../store/product-list-slice/product-list-action-thunk";
 
 class NavBar extends Component {
+  setCategory(category) {
+    //Guard Clause
+    if (category === this.props.currentCategory) return;
+
+    this.props.setCategory(category);
+  }
+
   render() {
     return (
       <div className={styles["nav-bar-container"]}>
-        {/*TODO, actually.. i'll do just that! * I thought about making categories render dynamically from the API but i
+        {/* Categories */}
+        {/* I considered making categories render dynamically from the API but i
         decided against it to avoid over-engineering */}
         <div
           className={`${styles["container"]} ${styles["categories-container"]}`}
         >
-          <div className={`${styles["category"]} ${styles["category-active"]}`}>
+          <div
+            className={`${styles["category"]} ${
+              this.props.currentCategory === "all" && styles["category-active"]
+            }`}
+            onClick={this.setCategory.bind(this, "all")}
+          >
             ALL
           </div>
-          <div className={styles["category"]}>CLOTHES</div>
-          <div className={styles["category"]}>TECH</div>
+          <div
+            className={`${styles["category"]} ${
+              this.props.currentCategory === "clothes" &&
+              styles["category-active"]
+            }`}
+            onClick={this.setCategory.bind(this, "clothes")}
+          >
+            CLOTHES
+          </div>
+          <div
+            className={`${styles["category"]} ${
+              this.props.currentCategory === "tech" && styles["category-active"]
+            }`}
+            onClick={this.setCategory.bind(this, "tech")}
+          >
+            TECH
+          </div>
         </div>
+
+        {/* Logo */}
         <div
           className={`${styles["container"]} ${styles["web-app-logo-container"]}`}
         >
           <Logo />
         </div>
+
+        {/* Actions */}
         <div
           className={`${styles["container"]} ${styles["actions-container"]}`}
         >
@@ -39,4 +73,13 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+const mapStateToProps = (state) => ({
+  currentCategory: state.productList.currentCategory,
+});
+const mapDispatchToProps = (dispatch) => ({
+  setCategory(category) {
+    dispatch(fetchProductList(category));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
