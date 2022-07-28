@@ -5,13 +5,28 @@ import styles from "./NavBar.module.css";
 import { ReactComponent as Logo } from "../../assets/web-app-logo.svg";
 import { ReactComponent as Cart } from "../../assets/cart.svg";
 import { fetchProductList } from "../../store/product-list-slice/product-list-action-thunks";
+import CurrencyToolTip from "./CurrencyToolTip";
 
 class NavBar extends Component {
+  constructor() {
+    super();
+    this.state = { showCurrencyTooltip: false, showCartTooltip: false };
+  }
+
   setCategory(category) {
     //Guard Clause
     if (category === this.props.currentCategory) return;
 
     this.props.setCategory(category);
+  }
+
+  currencyClickHandler(e) {
+    //? Guard Clause
+    if (e.target.hasAttribute("data-istooltip")) return;
+
+    this.setState((curState) => ({
+      showCurrencyTooltip: !curState.showCurrencyTooltip,
+    }));
   }
 
   render() {
@@ -48,8 +63,17 @@ class NavBar extends Component {
         <div
           className={`${styles["container"]} ${styles["actions-container"]}`}
         >
-          <div className={styles["action"]}>
-            $ <span>&#8964;</span>
+          <div
+            className={styles["action"]}
+            onClick={this.currencyClickHandler.bind(this)}
+          >
+            {this.props.currentCurrency.symbol}{" "}
+            {!this.state.showCurrencyTooltip ? (
+              <span>&#8964;</span>
+            ) : (
+              <span>&#8963;</span>
+            )}
+            {this.state.showCurrencyTooltip && <CurrencyToolTip />}
           </div>
           <div className={styles["action"]}>
             <Cart />
@@ -63,7 +87,10 @@ class NavBar extends Component {
 const mapStateToProps = (state) => ({
   currentCategory: state.productList.category.currentCategory,
   listOfCategories: state.productList.category.listOfCategories,
+  currentCurrency: state.productList.currency.currentCurrency,
+  listOfCurrencies: state.productList.currency.listOfCurrencies,
 });
+
 const mapDispatchToProps = (dispatch) => ({
   setCategory(category) {
     dispatch(fetchProductList(category));

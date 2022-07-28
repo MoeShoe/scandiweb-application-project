@@ -23,7 +23,6 @@ const productListSlice = createSlice({
     setProductList(state, action) {
       state.category.currentCategory = action.payload.category;
       state.products = action.payload.products;
-      console.log(state.products);
     },
 
     setCurrency(state, action) {

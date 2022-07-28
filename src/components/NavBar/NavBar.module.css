@@ -62,6 +62,7 @@
 }
 
 .action {
+  position: relative;
   display: flex;
   font-weight: 500;
   font-size: 18px;
