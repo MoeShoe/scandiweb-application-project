@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import styles from "./NavBar.module.css";
 import { ReactComponent as Logo } from "../../assets/web-app-logo.svg";
 import { ReactComponent as Cart } from "../../assets/cart.svg";
+import { productListActions } from "../../store/product-list-slice/product-list-slice";
 import { fetchProductList } from "../../store/product-list-slice/product-list-action-thunks";
 import CurrencyToolTip from "./CurrencyToolTip";
 
@@ -28,6 +29,10 @@ class NavBar extends Component {
       showCurrencyTooltip: !curState.showCurrencyTooltip,
     }));
   }
+
+  currencySelectHandler = (cur) => {
+    this.props.setCurrency(cur);
+  };
 
   render() {
     return (
@@ -73,7 +78,12 @@ class NavBar extends Component {
             ) : (
               <span>&#8963;</span>
             )}
-            {this.state.showCurrencyTooltip && <CurrencyToolTip />}
+            {this.state.showCurrencyTooltip && (
+              <CurrencyToolTip
+                listOfCurrencies={this.props.listOfCurrencies}
+                onCurrencyClick={this.currencySelectHandler.bind(this)}
+              />
+            )}
           </div>
           <div className={styles["action"]}>
             <Cart />
@@ -94,6 +104,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setCategory(category) {
     dispatch(fetchProductList(category));
+  },
+  setCurrency(cur) {
+    dispatch(productListActions.setCurrency(cur));
   },
 });
 
