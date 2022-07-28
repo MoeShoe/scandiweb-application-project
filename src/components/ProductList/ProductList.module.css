@@ -1,0 +1,11 @@
+.product-list-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 80px;
+  width: 100%;
+}
+
+.category-name {
+  font-size: 42px;
+  margin: 45px 0;
+}
