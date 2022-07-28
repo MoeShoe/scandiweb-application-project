@@ -41,7 +41,7 @@
 .category-active {
   font-weight: 600;
   color: var(--active-color);
-  box-shadow: 0 2px 0 var(--active-color);
+  border-bottom: solid 2px var(--active-color);
 }
 
 .category-active:hover {

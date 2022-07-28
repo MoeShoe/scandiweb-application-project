@@ -1,0 +1,27 @@
+.product-item-container {
+  margin: 50px 20px;
+  width: 356px;
+}
+
+.product-item-container img {
+  /* as in the figma design */
+  width: 356px;
+  height: 338px;
+  object-fit: cover;
+}
+
+.product-details {
+  margin: 30px 0 10px;
+}
+
+.product-name {
+  font-size: 18px;
+  font-weight: 300;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: 500;
+}

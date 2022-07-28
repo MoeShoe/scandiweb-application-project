@@ -13,9 +13,11 @@ class ProductList extends Component {
             .toUpperCase()
             .concat(this.props.category.slice(1))}
         </div>
-        {this.props.products.map((prod) => (
-          <ProductItem key={prod.id} />
-        ))}
+        <div className={styles["product-items-container"]}>
+          {this.props.products.map((prod) => (
+            <ProductItem key={prod.id} />
+          ))}
+        </div>
       </div>
     );
   }

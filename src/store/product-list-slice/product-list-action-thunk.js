@@ -6,22 +6,22 @@ import { productListActions } from "./product-list-slice";
 const fetchProductList = (category) => async (dispatch) => {
   try {
     const query = gql`
-{
-  category(input: {title :"${category}"}) {
-    products {
-      name
-      id
-      prices {
-        currency {
-          label
-          symbol
+      {
+        category(input: {title :"${category}"}) {
+          products {
+            name
+            id
+            prices {
+              currency {
+                label
+                symbol
+              }
+              amount
+            }
+            gallery
+          }
         }
-        amount
-      }
-      gallery
-    }
-  }
-}  
+      }  
 `;
 
     const data = await request(API_ENDPOINT, query);
