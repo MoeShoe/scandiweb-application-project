@@ -8,10 +8,8 @@ class CategoryItem extends Component {
       <div className={styles["product-item-container"]}>
         <img src="https://picsum.photos/1920/1080" alt="a pic" />
         <div className={styles["product-details"]}>
-          <div className={styles["product-name"]}>
-            Super Sonic Intecontinental Nuclear Capable Ballistic Missile
-          </div>
-          <div className={styles["product-price"]}>$50.00</div>
+          <div className={styles["product-name"]}>{this.props.name}</div>
+          <div className={styles["product-price"]}>{this.props.amount}</div>
         </div>
       </div>
     );

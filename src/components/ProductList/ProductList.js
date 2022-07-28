@@ -10,12 +10,16 @@ class ProductList extends Component {
       <div className={styles["product-list-container"]}>
         <div className={styles["category-name"]}>
           {this.props.category[0]
-            .toUpperCase()
-            .concat(this.props.category.slice(1))}
+            ?.toUpperCase()
+            ?.concat(this.props.category?.slice(1))}
         </div>
         <div className={styles["product-items-container"]}>
           {this.props.products.map((prod) => (
-            <ProductItem key={prod.id} />
+            <ProductItem
+              name={prod.name}
+              amount={prod.prices.amount}
+              key={prod.id}
+            />
           ))}
         </div>
       </div>
@@ -25,7 +29,7 @@ class ProductList extends Component {
 
 const mapStateToProps = (state) => ({
   products: state.productList.products,
-  category: state.productList.currentCategory,
+  category: state.productList.category.currentCategory,
 });
 const mapDispatchToProps = (dispatch) => ({});
 

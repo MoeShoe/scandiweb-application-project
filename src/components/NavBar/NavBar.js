@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import styles from "./NavBar.module.css";
 import { ReactComponent as Logo } from "../../assets/web-app-logo.svg";
 import { ReactComponent as Cart } from "../../assets/cart.svg";
-import fetchProductList from "../../store/product-list-slice/product-list-action-thunk";
+import { fetchProductList } from "../../store/product-list-slice/product-list-action-thunks";
 
 class NavBar extends Component {
   setCategory(category) {
@@ -18,37 +18,23 @@ class NavBar extends Component {
     return (
       <div className={styles["nav-bar-container"]}>
         {/* Categories */}
-        {/* I considered making categories render dynamically from the API  to improve scalability 
-        but i decided against it to avoid over-engineering, my thought process was that in a real
-        life project, if we decide to add more categories, we'll have to redesign the categories select UI */}
+        {/* i made the categories render dynamically from the backend
+         to improve the scalability of the web-app */}
         <div
           className={`${styles["container"]} ${styles["categories-container"]}`}
         >
-          <div
-            className={`${styles["category"]} ${
-              this.props.currentCategory === "all" && styles["category-active"]
-            }`}
-            onClick={this.setCategory.bind(this, "all")}
-          >
-            ALL
-          </div>
-          <div
-            className={`${styles["category"]} ${
-              this.props.currentCategory === "clothes" &&
-              styles["category-active"]
-            }`}
-            onClick={this.setCategory.bind(this, "clothes")}
-          >
-            CLOTHES
-          </div>
-          <div
-            className={`${styles["category"]} ${
-              this.props.currentCategory === "tech" && styles["category-active"]
-            }`}
-            onClick={this.setCategory.bind(this, "tech")}
-          >
-            TECH
-          </div>
+          {this.props.listOfCategories.map((cat) => (
+            <div
+              className={`${styles["category"]} ${
+                this.props.currentCategory === cat.name &&
+                styles["category-active"]
+              }`}
+              onClick={this.setCategory.bind(this, cat.name)}
+              key={cat.name}
+            >
+              {cat.name.toUpperCase()}
+            </div>
+          ))}
         </div>
 
         {/* Logo */}
@@ -75,7 +61,8 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  currentCategory: state.productList.currentCategory,
+  currentCategory: state.productList.category.currentCategory,
+  listOfCategories: state.productList.category.listOfCategories,
 });
 const mapDispatchToProps = (dispatch) => ({
   setCategory(category) {

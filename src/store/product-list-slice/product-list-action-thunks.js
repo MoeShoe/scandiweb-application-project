@@ -3,6 +3,39 @@ import { request, gql } from "graphql-request";
 import { API_ENDPOINT } from "../../constants/constants";
 import { productListActions } from "./product-list-slice";
 
+const initializeProductPage = () => async (dispatch) => {
+  try {
+    const query = gql`
+      {
+        categories {
+          name
+        }
+        currencies {
+          label
+          symbol
+        }
+      }
+    `;
+
+    const data = await request(API_ENDPOINT, query);
+
+    dispatch(
+      productListActions.initializeProductList({
+        categories: data.categories,
+        currencies: [data.currencies],
+      })
+    );
+
+    // page defaults
+    dispatch(fetchProductList("all"));
+    dispatch(productListActions.setCurrency("USD"));
+  } catch (err) {
+    /* very basic error handling without reflecting error state to 
+    the UI because it wasn't required in the assignment */
+    console.error(err.message);
+  }
+};
+
 const fetchProductList = (category) => async (dispatch) => {
   try {
     const query = gql`
@@ -33,10 +66,8 @@ const fetchProductList = (category) => async (dispatch) => {
       })
     );
   } catch (err) {
-    /* very basic error handling without reflecting error state to 
-    the UI because it wasn't required in the assignment */
     console.error(err.message);
   }
 };
 
-export default fetchProductList;
+export { fetchProductList, initializeProductPage };
