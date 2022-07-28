@@ -1,4 +1,75 @@
 .nav-bar-container {
   height: 80px;
   width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 33%;
+}
+
+.categories-container {
+  margin-left: 60px;
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 0 15px;
+  margin: 0 20px;
+  cursor: pointer;
+  transition: color 400ms;
+}
+
+.category:hover {
+  color: #ff4800;
+}
+
+.category-active {
+  font-weight: 600;
+  color: #5ece7b;
+  border-bottom: solid 2px #5ece7b;
+}
+
+.category-active:hover {
+  color: #5ece7b !important;
+}
+
+.web-app-logo-container {
+  justify-content: center;
+}
+
+.actions-container {
+  justify-content: flex-end;
+  margin-right: 60px;
+}
+
+.action {
+  display: flex;
+  font-weight: 500;
+  font-size: 18px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: color 400ms;
+}
+
+/* special case added to match design */
+.action span {
+  display: inline-block;
+  transform: translate(4px, -2px);
+  transition: color 400ms;
+}
+
+.action:hover,
+.action:hover span {
+  color: #ff4800;
 }
