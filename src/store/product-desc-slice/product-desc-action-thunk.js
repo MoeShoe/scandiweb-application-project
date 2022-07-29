@@ -20,8 +20,6 @@ const fetchProductDescription = (productId) => async (dispatch) => {
 
     const data = await request(API_ENDPOINT, query);
 
-    console.log(data.product);
-
     dispatch(productDescActions.setProductDesc(data.product));
   } catch (err) {
     console.error(err.message);

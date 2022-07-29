@@ -12,9 +12,13 @@ class ProductDescriptionPage extends Component {
   }
 
   render() {
-    return <ProductDesc />;
+    return <ProductDesc productData={this.props.productData} />;
   }
 }
+
+const mapStateToProps = (state) => ({
+  productData: state.productDesc.productDesc,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   getProductDescription(id) {
@@ -23,6 +27,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withRouter(ProductDescriptionPage));

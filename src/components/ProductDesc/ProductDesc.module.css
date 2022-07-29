@@ -1,0 +1,27 @@
+.product-desc-container {
+  display: flex;
+  padding: 72px 55px;
+}
+
+.images-container {
+  width: 8%;
+  margin: 0 25px;
+  /* temp */
+  height: 511px;
+  background-color: red;
+}
+
+.main-image-container {
+  width: 50%;
+  height: 511px;
+  background-color: blue;
+}
+
+.description-container {
+  width: 23%;
+  margin: 0 100px;
+  margin-right: 0;
+  /* temp */
+  height: 511px;
+  background-color: green;
+}
