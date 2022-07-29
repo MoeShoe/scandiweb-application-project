@@ -15,15 +15,16 @@ class ProductList extends Component {
         <div className={styles["product-items-container"]}>
           {this.props.products.map((prod) => (
             <ProductItem
-              name={prod.name}
-              amount={`${this.props.currency.symbol}${
-                prod.prices.find(
-                  (amt) => amt.currency.label === this.props.currency.label
-                ).amount
-              }`}
-              // the first pic in the gallery is used by default
-              img={prod.gallery.at(0)}
-              inStock={prod.inStock}
+              productData={{
+                name: prod.name,
+                amount: `${this.props.currency.symbol}${
+                  prod.prices.find(
+                    (amt) => amt.currency.label === this.props.currency.label
+                  ).amount
+                }`,
+                img: prod.gallery.at(0),
+                inStock: prod.inStock,
+              }}
               productId={prod.id}
               key={prod.id}
             />

@@ -9,19 +9,20 @@ class CategoryItem extends Component {
   }
 
   render() {
+    const { name, img, amount, inStock } = this.props.productData;
     return (
       <div
         className={`${styles["product-item-container"]} ${
-          !this.props.inStock ? styles["product-out-of-stock"] : ""
+          !inStock ? styles["product-out-of-stock"] : ""
         }`}
         onClick={this.productClickHandler.bind(this)}
       >
         <div className={styles["image-container"]}>
-          <img src={this.props.img} alt="a pic" />
+          <img src={img} alt="a pic" />
         </div>
         <div className={styles["product-details"]}>
-          <div className={styles["product-name"]}>{this.props.name}</div>
-          <div className={styles["product-price"]}>{this.props.amount}</div>
+          <div className={styles["product-name"]}>{name}</div>
+          <div className={styles["product-price"]}>{amount}</div>
         </div>
       </div>
     );

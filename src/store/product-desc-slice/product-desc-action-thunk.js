@@ -3,7 +3,7 @@ import { request, gql } from "graphql-request";
 import { API_ENDPOINT } from "../../constants/constants";
 import { productDescActions } from "./product-desc-slice";
 
-const getProductDescription = (productId) => async (dispatch) => {
+const fetchProductDescription = (productId) => async (dispatch) => {
   try {
     const query = gql`{
         product(id:"${productId}") {
@@ -20,12 +20,12 @@ const getProductDescription = (productId) => async (dispatch) => {
 
     const data = await request(API_ENDPOINT, query);
 
-    console.log(data);
+    console.log(data.product);
 
-    dispatch(productDescActions.setProductDesc(data));
+    dispatch(productDescActions.setProductDesc(data.product));
   } catch (err) {
     console.error(err.message);
   }
 };
 
-export { getProductDescription };
+export { fetchProductDescription };
