@@ -10,7 +10,11 @@ import { uiSliceActions } from "./store/ui-slice/ui-slice";
 
 class App extends Component {
   pageClickHandler(e) {
-    // this.props.closeAllOutlays();
+    //Guard Clause
+    // if the user clicks on the outlay itself, it won't close
+    if (e.target.closest("[data-isaction]")) return;
+
+    this.props.closeAllOutlays();
   }
 
   render() {

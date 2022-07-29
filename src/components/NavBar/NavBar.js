@@ -19,6 +19,7 @@ class NavBar extends Component {
 
   currencyClickHandler(e) {
     //Guard Clause
+    // outlay will not close if the user clicks on its scrollbar thanks to this
     if (e.target.hasAttribute("data-istooltip")) return;
 
     this.props.toggleCurrencyOutlay();
@@ -35,8 +36,8 @@ class NavBar extends Component {
     return (
       <div className={styles["nav-bar-container"]}>
         {/* Categories */}
-        {/* i made the categories render dynamically from the backend
-         to improve the scalability of the web-app */}
+        {/* i made the available categories aswell as currencies render dynamically from
+         the backend to improve the scalability of the web-app */}
         <div
           className={`${styles["container"]} ${styles["categories-container"]}`}
         >
@@ -68,6 +69,7 @@ class NavBar extends Component {
           <div
             className={styles["action"]}
             onClick={this.currencyClickHandler.bind(this)}
+            data-isaction
           >
             {this.props.currentCurrency.symbol}{" "}
             <span
@@ -84,7 +86,7 @@ class NavBar extends Component {
               />
             )}
           </div>
-          <div className={styles["action"]}>
+          <div className={styles["action"]} data-isaction>
             <Cart />
           </div>
         </div>
