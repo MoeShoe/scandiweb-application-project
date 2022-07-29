@@ -2,23 +2,24 @@ import { Component } from "react";
 import { connect } from "react-redux";
 
 import ProductList from "../components/ProductList/ProductList";
-import { initializeProductPage } from "../store/product-list-slice/product-list-action-thunks";
 
 class ProductListingPage extends Component {
-  componentDidMount() {
-    this.props.getProductList();
-  }
-
   render() {
-    return <ProductList />;
+    return (
+      <ProductList
+        products={this.props.products}
+        category={this.props.category}
+        currency={this.props.currency}
+      />
+    );
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  getProductList() {
-    // default category displayed when the page first loads is "all"
-    dispatch(initializeProductPage());
-  },
+const mapStateToProps = (state) => ({
+  products: state.productList.products,
+  category: state.productList.category.currentCategory,
+  currency: state.productList.currency.currentCurrency,
 });
+const mapDispatchToProps = (dispatch) => ({});
 
-export default connect(null, mapDispatchToProps)(ProductListingPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductListingPage);

@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { connect } from "react-redux";
 
 import styles from "./ProductList.module.css";
 import ProductItem from "./ProductItem";
@@ -25,6 +24,7 @@ class ProductList extends Component {
               // the first pic in the gallery is used by default
               img={prod.gallery.at(0)}
               inStock={prod.inStock}
+              productId={prod.id}
               key={prod.id}
             />
           ))}
@@ -34,11 +34,4 @@ class ProductList extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  products: state.productList.products,
-  category: state.productList.category.currentCategory,
-  currency: state.productList.currency.currentCurrency,
-});
-const mapDispatchToProps = (dispatch) => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductList);
+export default ProductList;

@@ -2,6 +2,8 @@ import { Switch, Route } from "react-router-dom";
 import { Component } from "react";
 import { connect } from "react-redux";
 
+import { initializeProductPage } from "./store/product-list-slice/product-list-action-thunks";
+
 import NavBar from "./components/NavBar/NavBar";
 import ProductListingPage from "./pages/ProductListingPage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
@@ -9,6 +11,10 @@ import CartPage from "./pages/CartPage";
 import { uiSliceActions } from "./store/ui-slice/ui-slice";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.initializeWebApp();
+  }
+
   pageClickHandler(e) {
     //Guard Clause
     // if the user clicks on the outlay itself, it won't close
@@ -25,7 +31,7 @@ class App extends Component {
           <Route path="/" exact>
             <ProductListingPage />
           </Route>
-          <Route path="/product-detail" exact>
+          <Route path="/products/:product" exact>
             <ProductDescriptionPage />
           </Route>
           <Route path="/cart" exact>
@@ -41,6 +47,9 @@ class App extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  initializeWebApp() {
+    dispatch(initializeProductPage());
+  },
   closeAllOutlays() {
     dispatch(uiSliceActions.closeAllOutlays());
   },
