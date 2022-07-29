@@ -38,6 +38,7 @@
   height: 45px;
   font-size: 18px;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .currency-select:hover {

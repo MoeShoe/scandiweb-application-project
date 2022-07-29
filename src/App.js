@@ -1,15 +1,21 @@
 import { Switch, Route } from "react-router-dom";
 import { Component } from "react";
+import { connect } from "react-redux";
 
 import NavBar from "./components/NavBar/NavBar";
 import ProductListingPage from "./pages/ProductListingPage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import CartPage from "./pages/CartPage";
+import { uiSliceActions } from "./store/ui-slice/ui-slice";
 
 class App extends Component {
+  pageClickHandler(e) {
+    // this.props.closeAllOutlays();
+  }
+
   render() {
     return (
-      <>
+      <div onClick={this.pageClickHandler.bind(this)}>
         <NavBar />
         <Switch>
           <Route path="/" exact>
@@ -25,9 +31,15 @@ class App extends Component {
             <div>404!</div>
           </Route>
         </Switch>
-      </>
+      </div>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  closeAllOutlays() {
+    dispatch(uiSliceActions.closeAllOutlays());
+  },
+});
+
+export default connect(null, mapDispatchToProps)(App);

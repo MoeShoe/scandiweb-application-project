@@ -5,7 +5,7 @@ import styles from "./CurrencyOverlay.module.css";
 class CurrencyToolTip extends Component {
   render() {
     return (
-      <div className={styles["tooltip-container"]} data-istooltip={true}>
+      <div className={styles["tooltip-container"]} data-istooltip>
         {this.props.listOfCurrencies.map((cur) => (
           <div
             className={styles["currency-select"]}

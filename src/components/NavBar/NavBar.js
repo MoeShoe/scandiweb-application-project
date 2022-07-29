@@ -7,13 +7,9 @@ import { ReactComponent as Cart } from "../../assets/cart.svg";
 import { productListActions } from "../../store/product-list-slice/product-list-slice";
 import { fetchProductList } from "../../store/product-list-slice/product-list-action-thunks";
 import CurrencyToolTip from "./CurrencyOverlay";
+import { uiSliceActions } from "../../store/ui-slice/ui-slice";
 
 class NavBar extends Component {
-  constructor() {
-    super();
-    this.state = { showCurrencyTooltip: false, showCartTooltip: false };
-  }
-
   setCategory(category) {
     //Guard Clause
     if (category === this.props.currentCategory) return;
@@ -22,15 +18,16 @@ class NavBar extends Component {
   }
 
   currencyClickHandler(e) {
-    //? Guard Clause
+    //Guard Clause
     if (e.target.hasAttribute("data-istooltip")) return;
 
-    this.setState((curState) => ({
-      showCurrencyTooltip: !curState.showCurrencyTooltip,
-    }));
+    this.props.toggleCurrencyOutlay();
   }
 
   currencySelectHandler = (cur) => {
+    //Guard Clause
+    if (cur.label === this.props.currentCurrency.label) return;
+
     this.props.setCurrency(cur);
   };
 
@@ -75,12 +72,12 @@ class NavBar extends Component {
             {this.props.currentCurrency.symbol}{" "}
             <span
               className={`${
-                this.state.showCurrencyTooltip ? styles["flip-symbol"] : ""
+                this.props.showCurrencyOutlay ? styles["flip-symbol"] : ""
               }`}
             >
               &#8964;
             </span>
-            {this.state.showCurrencyTooltip && (
+            {this.props.showCurrencyOutlay && (
               <CurrencyToolTip
                 listOfCurrencies={this.props.listOfCurrencies}
                 onCurrencyClick={this.currencySelectHandler.bind(this)}
@@ -101,14 +98,21 @@ const mapStateToProps = (state) => ({
   listOfCategories: state.productList.category.listOfCategories,
   currentCurrency: state.productList.currency.currentCurrency,
   listOfCurrencies: state.productList.currency.listOfCurrencies,
+  showCurrencyOutlay: state.ui.showCurrencyOutlay,
+  showCartOutlay: state.ui.showCartOutlay,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setCategory(category) {
     dispatch(fetchProductList(category));
   },
+
   setCurrency(cur) {
     dispatch(productListActions.setCurrency(cur));
+  },
+
+  toggleCurrencyOutlay() {
+    dispatch(uiSliceActions.toggleCurrencyOutlay());
   },
 });
 
