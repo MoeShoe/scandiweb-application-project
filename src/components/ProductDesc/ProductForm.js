@@ -5,8 +5,15 @@ import Button from "../UI/Button";
 
 class ProductForm extends Component {
   render() {
-    const { brand, name, attributes, prices, description, currentCurrency } =
-      this.props.formData;
+    const {
+      brand,
+      name,
+      attributes,
+      prices,
+      description,
+      currentCurrency,
+      inStock,
+    } = this.props.formData;
     return (
       <div className={styles["description-list-container"]}>
         <div className={styles["brand"]}>{brand}</div>
@@ -47,9 +54,17 @@ class ProductForm extends Component {
             }`}
           </div>
         </div>
-        <Button className={styles["button"]}>ADD TO CART</Button>
+        {inStock && <Button className={styles["button"]}>ADD TO CART</Button>}
+        {!inStock && (
+          <Button
+            className={`${styles["button"]} ${styles["out-of-stock-button"]}`}
+          >
+            OUT OF STOCK
+          </Button>
+        )}
         <div
           className={styles["description-container"]}
+          /* really only dangerous when inserting from an unknown source */
           dangerouslySetInnerHTML={{
             __html: description,
           }}

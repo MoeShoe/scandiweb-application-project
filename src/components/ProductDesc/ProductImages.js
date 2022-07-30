@@ -8,6 +8,11 @@ class ProductImages extends Component {
     this.state = { currentImage: this.props?.imagesList?.at(0) };
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.imagesList?.at(0) !== this.props.imagesList?.at(0))
+      this.setState({ currentImage: this.props?.imagesList?.at(0) });
+  }
+
   imageSelectClickHandler(e) {
     this.setState({ currentImage: e.target.src });
   }
@@ -17,11 +22,12 @@ class ProductImages extends Component {
       <>
         <div className={styles["images-container"]}>
           {this.props.imagesList?.map((img, i) => (
-            <div className={styles["image-select-container"]}>
+            /* i know it is discouraged to use indexes as keys, but in this particular case
+            it is not an issue since the product data state resets on component unmount */
+            <div className={styles["image-select-container"]} key={i}>
               <img
                 src={img}
-                alt={`product ${i}`}
-                key={i}
+                alt={`product ${i + 1}`}
                 onClick={this.imageSelectClickHandler.bind(this)}
               />
             </div>

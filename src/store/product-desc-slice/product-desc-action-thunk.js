@@ -20,6 +20,13 @@ const fetchProductDescription = (productId) => async (dispatch) => {
 
     const data = await request(API_ENDPOINT, query);
 
+    /* a condition that checks whether the product exists, for example if the
+     user enters a random product url like: /products/lee_ghandi's_nuts */
+    if (!data.product) {
+      dispatch(productDescActions.setProductIsNotFound(true));
+      return;
+    }
+
     dispatch(productDescActions.setProductDesc(data.product));
   } catch (err) {
     console.error(err.message);

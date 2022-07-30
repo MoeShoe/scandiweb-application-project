@@ -10,7 +10,12 @@ const productDescSlice = createSlice({
   initialState: productDescInitialState,
   reducers: {
     setProductDesc(state, action) {
+      state.productNotFound = false;
       state.productDesc = action.payload;
+    },
+
+    setProductIsNotFound(state, action) {
+      state.productNotFound = action.payload;
     },
   },
 });

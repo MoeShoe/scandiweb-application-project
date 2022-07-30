@@ -74,6 +74,14 @@
   margin: 20px 0;
 }
 
+.out-of-stock-button {
+  background-color: white !important;
+  color: #1d1f22 !important;
+  border: solid 1px #1d1f22 !important;
+  opacity: 0.5;
+  cursor: default !important;
+}
+
 .description-container,
 .description-container * {
   font-family: "Roboto", sans-serif;
