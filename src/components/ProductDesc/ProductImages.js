@@ -1,5 +1,4 @@
 import { Component } from "react";
-import ScrollContainer from "react-indiana-drag-scroll";
 
 import styles from "./ProductImages.module.css";
 
@@ -28,9 +27,9 @@ class ProductImages extends Component {
             </div>
           ))}
         </div>
-        <ScrollContainer className={styles["main-image-container"]}>
+        <div className={styles["main-image-container"]}>
           <img src={this.state.currentImage} alt="product" />
-        </ScrollContainer>
+        </div>
       </>
     );
   }

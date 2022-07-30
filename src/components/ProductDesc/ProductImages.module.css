@@ -22,11 +22,11 @@
   /* percentages used for responsivity still matches design dimenstions on provided screen resolution */
   max-width: 50%;
   max-height: 70vh;
-  overflow: auto;
-  /* did not like the default one, this one is used by gmail */
-  cursor: url(https://ssl.gstatic.com/ui/v1/icons/mail/images/2/openhand.cur),
-    default !important;
+  overflow: hidden;
 }
 
-/* .main-image-container img {
-  } */
+.main-image-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
