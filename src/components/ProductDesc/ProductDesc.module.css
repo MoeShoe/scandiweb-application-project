@@ -6,22 +6,83 @@
 .images-container {
   width: 8%;
   margin: 0 25px;
-  /* temp */
-  height: 511px;
-  background-color: red;
+  overflow: auto;
+}
+
+.image-select-container {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 40px;
+  aspect-ratio: 1 / 1;
+}
+
+.image-select-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .main-image-container {
+  /* percentages used for responsivity, design dimensions didn't make sense */
   width: 50%;
-  height: 511px;
-  background-color: blue;
+}
+
+.main-image-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .description-container {
-  width: 23%;
+  width: 25%;
   margin: 0 100px;
   margin-right: 0;
-  /* temp */
-  height: 511px;
-  background-color: green;
+}
+
+.brand {
+  font-weight: 600;
+  font-size: 30px;
+  margin-bottom: 16px;
+}
+
+.name {
+  font-size: 30px;
+}
+
+.attribute-main-container {
+  margin-top: 19px;
+}
+
+.attribute-container {
+  margin: 43px 0 12px;
+}
+
+.detail-title {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.attribute-select-container {
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.text-attr-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  width: 63px;
+  border: solid 1px #1d1f22;
+  margin-right: 12px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 24px;
+  margin: 20px 0;
 }
