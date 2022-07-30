@@ -74,6 +74,7 @@
   margin: 20px 0;
 }
 
+.description-container,
 .description-container * {
   font-family: "Roboto", sans-serif;
   line-height: 26px;
