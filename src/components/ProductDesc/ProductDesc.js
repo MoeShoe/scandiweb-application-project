@@ -2,6 +2,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 
 import styles from "./ProductDesc.module.css";
+import Button from "../UI/Button";
 
 class ProductDesc extends Component {
   render() {
@@ -18,7 +19,7 @@ class ProductDesc extends Component {
         <div className={styles["main-image-container"]}>
           <img src={this.props.productData?.gallery?.at(0)} alt="product" />
         </div>
-        <div className={styles["description-container"]}>
+        <div className={styles["description-list-container"]}>
           <div className={styles["brand"]}>{this.props.productData?.brand}</div>
           <div className={styles["name"]}>{this.props.productData?.name}</div>
           <div className={styles["attributes-main-container"]}>
@@ -33,6 +34,15 @@ class ProductDesc extends Component {
                       <div className={styles["text-attr-select"]} key={itm.id}>
                         {itm.displayValue}
                       </div>
+                    ))}
+
+                  {attr.type === "swatch" &&
+                    attr.items.map((itm) => (
+                      <div
+                        className={styles["swatch-attr-select"]}
+                        style={{ backgroundColor: itm.value }}
+                        key={itm.id}
+                      ></div>
                     ))}
                 </div>
               </div>
@@ -49,6 +59,13 @@ class ProductDesc extends Component {
               }`}
             </div>
           </div>
+          <Button className={styles["button"]}>ADD TO CART</Button>
+          <div
+            className={styles["description-container"]}
+            dangerouslySetInnerHTML={{
+              __html: this.props.productData.description,
+            }}
+          ></div>
         </div>
       </div>
     );
