@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   border-top: solid 1px #e5e5e5;
+  min-height: 336px;
   padding: 24px 0;
 }
 
@@ -115,7 +116,7 @@
   overflow: hidden;
   text-align: center;
   font-weight: 100;
-  font-size: 50px;
+  font-size: 53px;
 }
 
 .quantity {
@@ -150,6 +151,15 @@
 
 .image-container button:hover {
   background-color: #000;
+}
+
+.image-container button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.image-container button:disabled:hover {
+  background-color: rgba(0, 0, 0, 0.73);
 }
 
 .button-left {

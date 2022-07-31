@@ -4,6 +4,37 @@ import { ReactComponent as ArrowHead } from "../../assets/arrow-head.svg";
 import styles from "./CartItem.module.css";
 
 class CartItem extends Component {
+  constructor() {
+    super();
+    this.state = { displayedImageIndex: 0 };
+  }
+
+  $itemIncrementHandler() {
+    this.props.itemIncrementHandler(this.props.itemData.id);
+  }
+
+  $itemDecrementHandler() {
+    this.props.itemDecrementHandler(this.props.itemData.id);
+  }
+
+  leftClickHandler() {
+    this.setState((prevState) => ({
+      displayedImageIndex:
+        prevState.displayedImageIndex - 1 >= 0
+          ? prevState.displayedImageIndex - 1
+          : this.props.itemData.gallery.length - 1,
+    }));
+  }
+
+  rightClickHandler() {
+    this.setState((prevState) => ({
+      displayedImageIndex:
+        prevState.displayedImageIndex + 1 !== this.props.itemData.gallery.length
+          ? prevState.displayedImageIndex + 1
+          : 0,
+    }));
+  }
+
   render() {
     return (
       <div className={styles["cart-item-container"]}>
@@ -65,23 +96,31 @@ class CartItem extends Component {
         </div>
         <div className={styles["image-main-container"]}>
           <div className={styles["actions-container"]}>
-            <button>
+            <button onClick={this.$itemIncrementHandler.bind(this)}>
               <span>+</span>
             </button>
             <div className={styles["quantity"]}>{this.props.quantity}</div>
-            <button>
-              <span style={{ transform: "translateY(-5px)" }}>-</span>
+            <button onClick={this.$itemDecrementHandler.bind(this)}>
+              <span style={{ transform: "translateY(-3.5px)" }}>-</span>
             </button>
           </div>
           <div className={styles["image-container"]}>
             <img
-              src={this.props.itemData.gallery[0]}
+              src={this.props.itemData.gallery[this.state.displayedImageIndex]}
               alt={this.props.itemData.name}
             />
-            <button className={styles["button-left"]}>
+            <button
+              className={styles["button-left"]}
+              onClick={this.leftClickHandler.bind(this)}
+              disabled={this.props.itemData.gallery.length === 1}
+            >
               <ArrowHead />
             </button>
-            <button className={styles["button-right"]}>
+            <button
+              className={styles["button-right"]}
+              onClick={this.rightClickHandler.bind(this)}
+              disabled={this.props.itemData.gallery.length === 1}
+            >
               <ArrowHead />
             </button>
           </div>

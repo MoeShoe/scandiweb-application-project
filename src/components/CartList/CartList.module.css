@@ -12,3 +12,60 @@
   margin-top: 55px;
   margin-bottom: 32px;
 }
+
+.cart-summary-container {
+  margin: 32px 0;
+}
+
+.data-main-container {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.fields-container {
+  margin-right: 10px;
+}
+
+.fields-container div {
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.fields-container div:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.total {
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.data-container div {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.data-container div:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.order-button {
+  padding: 13px 115.5px;
+}
+
+.order-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.no-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 336px;
+  padding: 24px 0;
+  font-weight: 500;
+  font-size: 26px;
+}
