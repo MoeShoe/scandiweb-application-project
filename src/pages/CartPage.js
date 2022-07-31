@@ -1,8 +1,10 @@
 import { Component } from "react";
 
+import CartList from "../components/CartList/CartList";
+
 class CartPage extends Component {
   render() {
-    return <div>This is the Cart Page!</div>;
+    return <CartList />;
   }
 }
 

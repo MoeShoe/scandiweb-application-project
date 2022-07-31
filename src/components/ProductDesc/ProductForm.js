@@ -4,7 +4,33 @@ import styles from "./ProductForm.module.css";
 import Button from "../UI/Button";
 
 class ProductForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedAttributes: [],
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevProps.formData?.attributes?.length &&
+      prevProps.formData?.attributes?.length !==
+        prevState.selectedAttributes.length
+    ) {
+      this.setState({
+        selectedAttributes: [
+          ...prevProps.formData?.attributes?.map((attr) => ({
+            id: attr.id,
+            //  by default the first attributes is selected
+            selectedAttribute: attr.items.at(0),
+          })),
+        ],
+      });
+    }
+  }
+
   render() {
+    console.log(this.state.selectedAttributes);
     const {
       brand,
       name,
@@ -27,7 +53,17 @@ class ProductForm extends Component {
               <div className={styles["attribute-select-container"]}>
                 {attr.type === "text" &&
                   attr.items.map((itm) => (
-                    <div className={styles["text-attr-select"]} key={itm.id}>
+                    <div
+                      className={`${styles["text-attr-select"]} ${
+                        itm.id ===
+                        this.state.selectedAttributes.find(
+                          (at) => at.id === attr.id
+                        )?.selectedAttribute?.id
+                          ? styles["text-attr-selected"]
+                          : ""
+                      }`}
+                      key={itm.id}
+                    >
                       {itm.displayValue}
                     </div>
                   ))}
@@ -35,7 +71,14 @@ class ProductForm extends Component {
                 {attr.type === "swatch" &&
                   attr.items.map((itm) => (
                     <div
-                      className={styles["swatch-attr-select"]}
+                      className={`${styles["swatch-attr-select"]} ${
+                        itm.id ===
+                        this.state.selectedAttributes.find(
+                          (at) => at.id === attr.id
+                        )?.selectedAttribute?.id
+                          ? styles["swatch-attr-selected"]
+                          : ""
+                      }`}
                       style={{ backgroundColor: itm.value }}
                       key={itm.id}
                     ></div>
