@@ -29,8 +29,24 @@ class ProductForm extends Component {
     }
   }
 
+  attributeSelectClickHandler(attrData) {
+    const attrIndex = this.state.selectedAttributes.findIndex(
+      (attr) => attr.id === attrData.attrId
+    );
+    const newAttrState = this.state.selectedAttributes.slice();
+    newAttrState[attrIndex] = {
+      id: attrData.attrId,
+      selectedAttribute: attrData.item,
+    };
+
+    this.setState({ selectedAttributes: newAttrState });
+  }
+
+  addProductClickHandler() {
+    this.props.onProductAdd(this.state.selectedAttributes);
+  }
+
   render() {
-    console.log(this.state.selectedAttributes);
     const {
       brand,
       name,
@@ -40,6 +56,7 @@ class ProductForm extends Component {
       currentCurrency,
       inStock,
     } = this.props.formData;
+
     return (
       <div className={styles["description-list-container"]}>
         <div className={styles["brand"]}>{brand}</div>
@@ -62,6 +79,10 @@ class ProductForm extends Component {
                           ? styles["text-attr-selected"]
                           : ""
                       }`}
+                      onClick={this.attributeSelectClickHandler.bind(this, {
+                        attrId: attr.id,
+                        item: itm,
+                      })}
                       key={itm.id}
                     >
                       {itm.displayValue}
@@ -80,6 +101,10 @@ class ProductForm extends Component {
                           : ""
                       }`}
                       style={{ backgroundColor: itm.value }}
+                      onClick={this.attributeSelectClickHandler.bind(this, {
+                        attrId: attr.id,
+                        item: itm,
+                      })}
                       key={itm.id}
                     ></div>
                   ))}
@@ -97,7 +122,14 @@ class ProductForm extends Component {
             }`}
           </div>
         </div>
-        {inStock && <Button className={styles["button"]}>ADD TO CART</Button>}
+        {inStock && (
+          <Button
+            className={styles["button"]}
+            onClick={this.addProductClickHandler.bind(this)}
+          >
+            ADD TO CART
+          </Button>
+        )}
         {!inStock && (
           <Button
             className={`${styles["button"]} ${styles["out-of-stock-button"]}`}

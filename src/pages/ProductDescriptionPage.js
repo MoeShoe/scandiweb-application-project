@@ -6,6 +6,7 @@ import { fetchProductDescription } from "../store/product-desc-slice/product-des
 
 import ProductDesc from "../components/ProductDesc/ProductDesc";
 import { productDescActions } from "../store/product-desc-slice/product-desc-slice";
+import { cartActions } from "../store/cart-slice/cart-slice";
 
 class ProductDescriptionPage extends Component {
   componentDidMount() {
@@ -16,6 +17,16 @@ class ProductDescriptionPage extends Component {
     this.props.pdpUnmountHandler();
   }
 
+  // i took the approach of handling all state in the page component and having the children of said component be controlled
+  $addProductToCartHandler(selectedAttributes) {
+    this.props.addProductToCartHandler({
+      item: this.props.productData,
+      selectedAttributes,
+      quantity: 1, //by default is 1
+    });
+    this.props.history.push("/");
+  }
+
   render() {
     // simple product not found page
     if (this.props.productNotFound) return <div>Product not found!</div>;
@@ -23,6 +34,7 @@ class ProductDescriptionPage extends Component {
       <ProductDesc
         productData={this.props.productData}
         currentCurrency={this.props.currentCurrency}
+        onProductAdd={this.$addProductToCartHandler.bind(this)}
       />
     );
   }
@@ -38,6 +50,11 @@ const mapDispatchToProps = (dispatch) => ({
   getProductDescription(id) {
     dispatch(fetchProductDescription(id));
   },
+
+  addProductToCartHandler(item) {
+    dispatch(cartActions.addItemToCart(item));
+  },
+
   pdpUnmountHandler() {
     dispatch(productDescActions.setProductDesc({}));
   },

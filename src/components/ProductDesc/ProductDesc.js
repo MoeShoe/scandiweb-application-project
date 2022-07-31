@@ -5,6 +5,10 @@ import ProductImages from "./ProductImages";
 import ProductForm from "./ProductForm";
 
 class ProductDesc extends Component {
+  $onProductAdd(selectedAttributes) {
+    this.props.onProductAdd(selectedAttributes);
+  }
+
   render() {
     const { gallery, ...formData } = this.props.productData;
     return (
@@ -15,6 +19,7 @@ class ProductDesc extends Component {
             ...formData,
             currentCurrency: this.props.currentCurrency,
           }}
+          onProductAdd={this.$onProductAdd.bind(this)}
         />
       </div>
     );
