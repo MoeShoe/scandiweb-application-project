@@ -1,0 +1,170 @@
+.cart-item-container {
+  display: flex;
+  justify-content: space-between;
+  border-top: solid 1px #e5e5e5;
+  padding: 24px 0;
+}
+
+.cart-item-container:last-child {
+  border-bottom: solid 1px #e5e5e5;
+}
+
+.attributes-details-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.item-name {
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.item-price {
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.attributes-main-container {
+  margin-top: 20px;
+}
+
+.attribute-container {
+  margin-bottom: 16px;
+}
+
+.detail-title {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.attribute-select-container {
+  display: flex;
+  margin-top: 8px;
+  margin-left: 1px;
+}
+
+.text-attr-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 45px;
+  width: 63px;
+  border: solid 1px #1d1f22;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+}
+
+.text-attr-select:not(:last-child) {
+  margin-right: 8px;
+}
+
+.text-attr-selected {
+  color: #fff !important;
+  background-color: #1d1f22 !important;
+}
+
+.swatch-attr-select {
+  height: 33px;
+  width: 33px;
+  margin: 2px 10px 2px 0;
+  border: solid 1px white;
+}
+
+.swatch-attr-selected {
+  outline: 1px solid #5ece7b;
+}
+
+.image-main-container {
+  display: flex;
+}
+
+.actions-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  margin: 0 24px;
+}
+
+.actions-container button {
+  background-color: #fff;
+  height: 45px;
+  width: 45px;
+  padding: 0;
+  border: solid 1px #1d1f22;
+  cursor: pointer;
+}
+
+.actions-container button span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  font-weight: 100;
+  font-size: 50px;
+}
+
+.quantity {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.image-container {
+  position: relative;
+  height: 100%;
+  width: 200px;
+}
+
+.image-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.image-container button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.73);
+  border: none;
+  height: 24px;
+  width: 24px;
+  bottom: 16px;
+  cursor: pointer;
+}
+
+.image-container button:hover {
+  background-color: #000;
+}
+
+.button-left {
+  right: 48px;
+  transform: rotate(180deg);
+}
+
+.button-left svg {
+  transform: translate(2px, 0.5px);
+}
+
+.button-right {
+  right: 16px;
+}
+
+.button-right svg {
+  transform: translateX(2px);
+}

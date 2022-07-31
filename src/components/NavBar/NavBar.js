@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import styles from "./NavBar.module.css";
 import { ReactComponent as Logo } from "../../assets/web-app-logo.svg";
@@ -59,7 +60,9 @@ class NavBar extends Component {
         <div
           className={`${styles["container"]} ${styles["web-app-logo-container"]}`}
         >
-          <Logo />
+          <Link to="/cart">
+            <Logo />
+          </Link>
         </div>
 
         {/* Actions */}

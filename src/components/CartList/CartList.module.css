@@ -1,0 +1,14 @@
+.cart-list-container {
+  padding: 0 100px;
+}
+
+.cart-header {
+  margin-top: 80px;
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.cart-items-container {
+  margin-top: 55px;
+  margin-bottom: 32px;
+}
