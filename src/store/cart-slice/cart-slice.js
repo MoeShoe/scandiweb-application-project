@@ -12,8 +12,17 @@ const cartSlice = createSlice({
   initialState: cartInitialState,
   reducers: {
     addItemToCart(state, action) {
+      const indexOfDuplicate = state.products.findIndex(
+        (pro) => pro.item.id === action.payload.item.id
+      );
+
+      if (indexOfDuplicate !== -1) {
+        //if the item with the same attributes is already in the cart, it only get incremented by 1
+        state.products[indexOfDuplicate].quantity += 1;
+        return;
+      }
+
       state.products.push(action.payload);
-      console.log(action.payload);
     },
 
     incrementItemCount(state, action) {

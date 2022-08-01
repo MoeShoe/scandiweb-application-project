@@ -19,8 +19,17 @@ class ProductDescriptionPage extends Component {
 
   // i took the approach of handling all state in the page component and having the children of said component be controlled
   $addProductToCartHandler(selectedAttributes) {
+    // creates a special id that is special to the product with its attribute, helps us detect duplicates
+    const productId = this.props.productData.id.concat(
+      selectedAttributes.reduce(
+        (acc, attrId) =>
+          acc.concat(attrId.id.concat(attrId.selectedAttribute.id)),
+        ""
+      )
+    );
+
     this.props.addProductToCartHandler({
-      item: this.props.productData,
+      item: { ...this.props.productData, id: productId },
       selectedAttributes,
       quantity: 1, //by default is 1
     });
