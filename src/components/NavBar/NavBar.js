@@ -22,7 +22,7 @@ class NavBar extends Component {
   currencyClickHandler(e) {
     //Guard Clause
     // outlay will not close if the user clicks on its scrollbar thanks to this
-    if (e.target.hasAttribute("data-isoverlay")) return;
+    if (e.target.closest("#overlay")) return;
 
     this.props.toggleCurrencyOutlay();
   }
@@ -35,7 +35,7 @@ class NavBar extends Component {
   };
 
   cartClickHandler(e) {
-    if (e.target.hasAttribute("data-isoverlay")) return;
+    if (e.target.closest("#overlay")) return;
 
     this.props.toggleCartOutlay();
   }

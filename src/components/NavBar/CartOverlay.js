@@ -9,7 +9,7 @@ class CartOverlay extends Component {
   render() {
     console.log(this.props);
     return (
-      <div className={styles["cart-overlay-container"]} data-isoverlay>
+      <div className={styles["cart-overlay-container"]} id="overlay">
         <div className={styles["header"]}>
           <div className={styles["bag"]}>My Bag,</div>{" "}
           {this.props.cartData.reduce((acc, item) => acc + item.quantity, 0)}{" "}

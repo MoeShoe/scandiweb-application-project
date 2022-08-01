@@ -9,6 +9,7 @@
   z-index: 1;
   cursor: default;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+  overflow-y: auto;
 }
 
 .header {
