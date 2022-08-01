@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import { ReactComponent as Logo } from "../../assets/web-app-logo.svg";
 import { ReactComponent as Cart } from "../../assets/cart.svg";
+import CurrencyOverlay from "./CurrencyOverlay";
+import CartOverlay from "./CartOverlay";
 import { productListActions } from "../../store/product-list-slice/product-list-slice";
 import { fetchProductList } from "../../store/product-list-slice/product-list-action-thunks";
-import CurrencyToolTip from "./CurrencyOverlay";
-import { uiSliceActions } from "../../store/ui-slice/ui-slice";
+import { uiActions } from "../../store/ui-slice/ui-slice";
 
 class NavBar extends Component {
   setCategory(category) {
@@ -21,7 +22,7 @@ class NavBar extends Component {
   currencyClickHandler(e) {
     //Guard Clause
     // outlay will not close if the user clicks on its scrollbar thanks to this
-    if (e.target.hasAttribute("data-istooltip")) return;
+    if (e.target.hasAttribute("data-isoverlay")) return;
 
     this.props.toggleCurrencyOutlay();
   }
@@ -32,6 +33,12 @@ class NavBar extends Component {
 
     this.props.setCurrency(cur);
   };
+
+  cartClickHandler(e) {
+    if (e.target.hasAttribute("data-isoverlay")) return;
+
+    this.props.toggleCartOutlay();
+  }
 
   render() {
     return (
@@ -83,14 +90,24 @@ class NavBar extends Component {
               &#8964;
             </span>
             {this.props.showCurrencyOutlay && (
-              <CurrencyToolTip
+              <CurrencyOverlay
                 listOfCurrencies={this.props.listOfCurrencies}
                 onCurrencyClick={this.currencySelectHandler.bind(this)}
               />
             )}
           </div>
-          <div className={styles["action"]} data-isaction>
+          <div
+            className={styles["action"]}
+            onClick={this.cartClickHandler.bind(this)}
+            data-isaction
+          >
             <Cart />
+            {this.props.showCartOutlay && (
+              <CartOverlay
+                cartData={this.props.cartData}
+                currentCurrency={this.props.currentCurrency}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -105,6 +122,7 @@ const mapStateToProps = (state) => ({
   listOfCurrencies: state.productList.currency.listOfCurrencies,
   showCurrencyOutlay: state.ui.showCurrencyOutlay,
   showCartOutlay: state.ui.showCartOutlay,
+  cartData: state.cart.products,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -117,7 +135,11 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   toggleCurrencyOutlay() {
-    dispatch(uiSliceActions.toggleCurrencyOutlay());
+    dispatch(uiActions.toggleCurrencyOutlay());
+  },
+
+  toggleCartOutlay() {
+    dispatch(uiActions.toggleCartOutlay());
   },
 });
 

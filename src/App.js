@@ -8,7 +8,7 @@ import NavBar from "./components/NavBar/NavBar";
 import ProductListingPage from "./pages/ProductListingPage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import CartPage from "./pages/CartPage";
-import { uiSliceActions } from "./store/ui-slice/ui-slice";
+import { uiActions } from "./store/ui-slice/ui-slice";
 
 class App extends Component {
   componentDidMount() {
@@ -51,7 +51,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(initializeProductPage());
   },
   closeAllOutlays() {
-    dispatch(uiSliceActions.closeAllOutlays());
+    dispatch(uiActions.closeAllOutlays());
   },
 });
 
