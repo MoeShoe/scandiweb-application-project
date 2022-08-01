@@ -1,15 +1,24 @@
 import { Component } from "react";
 
 import styles from "./CartOverlay.module.css";
-import CartOutlayItem from "./CartOutlayItem";
+import CartOverlayItem from "./CartOverlayItem";
 
 class CartOverlay extends Component {
-  $onItemIncrement() {}
-  $onItemDecrement() {}
+  itemIncrementHandler(productId) {
+    this.props.onCartItemIncrement(productId);
+  }
+
+  itemDecrementHandler(productId) {
+    this.props.onCartItemDecrement(productId);
+  }
+
   render() {
     console.log(this.props);
     return (
-      <div className={styles["cart-overlay-container"]} id="overlay">
+      <div
+        className={`${styles["cart-overlay-container"]} custom-scrollbar-container`}
+        id="overlay"
+      >
         <div className={styles["header"]}>
           <div className={styles["bag"]}>My Bag,</div>{" "}
           {this.props.cartData.reduce((acc, item) => acc + item.quantity, 0)}{" "}
@@ -17,13 +26,13 @@ class CartOverlay extends Component {
         </div>
         <div className={styles["cart-items-container"]}>
           {this.props.cartData.map((itm) => (
-            <CartOutlayItem
+            <CartOverlayItem
               itemData={itm.item}
               itemSelectedAttributes={itm.selectedAttributes}
               quantity={itm.quantity}
               currentCurrency={this.props.currentCurrency}
-              itemIncrementHandler={this.$onItemIncrement.bind(this)}
-              itemDecrementHandler={this.$onItemDecrement.bind(this)}
+              itemIncrementHandler={this.itemIncrementHandler.bind(this)}
+              itemDecrementHandler={this.itemDecrementHandler.bind(this)}
               key={itm.item.id}
             />
           ))}

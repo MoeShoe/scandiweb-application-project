@@ -2,13 +2,15 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { fetchProductList } from "../../store/product-list-slice/product-list-action-thunks";
+
 import styles from "./NavBar.module.css";
 import { ReactComponent as Logo } from "../../assets/web-app-logo.svg";
 import { ReactComponent as Cart } from "../../assets/cart.svg";
 import CurrencyOverlay from "./CurrencyOverlay";
 import CartOverlay from "./CartOverlay";
+import { cartActions } from "../../store/cart-slice/cart-slice";
 import { productListActions } from "../../store/product-list-slice/product-list-slice";
-import { fetchProductList } from "../../store/product-list-slice/product-list-action-thunks";
 import { uiActions } from "../../store/ui-slice/ui-slice";
 
 class NavBar extends Component {
@@ -106,6 +108,8 @@ class NavBar extends Component {
               <CartOverlay
                 cartData={this.props.cartData}
                 currentCurrency={this.props.currentCurrency}
+                onCartItemIncrement={this.props.cartIncrementHandler}
+                onCartItemDecrement={this.props.cartDecrementHandler}
               />
             )}
           </div>
@@ -132,6 +136,14 @@ const mapDispatchToProps = (dispatch) => ({
 
   setCurrency(cur) {
     dispatch(productListActions.setCurrency(cur));
+  },
+
+  cartIncrementHandler(productId) {
+    dispatch(cartActions.incrementItemCount(productId));
+  },
+
+  cartDecrementHandler(productId) {
+    dispatch(cartActions.decrementItemCount(productId));
   },
 
   toggleCurrencyOutlay() {

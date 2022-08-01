@@ -1,12 +1,19 @@
 import { Component } from "react";
 
-import styles from "./CartOutlayItem.module.css";
+import styles from "./CartOverlayItem.module.css";
 
 class CartOutLayItem extends Component {
+  onItemIncrement() {
+    this.props.itemIncrementHandler(this.props.itemData.id);
+  }
+
+  onItemDecrement() {
+    this.props.itemDecrementHandler(this.props.itemData.id);
+  }
+
   render() {
     return (
       <div className={styles["cart-item-container"]}>
-        {" "}
         <div className={styles["data-container"]}>
           <div className={styles["header-container"]}>
             {this.props.itemData.brand} <br />
@@ -37,7 +44,14 @@ class CartOutLayItem extends Component {
                         }`}
                         key={itm.id}
                       >
-                        {itm.displayValue}
+                        {(!parseInt(itm.displayValue) &&
+                          itm.displayValue.length > 3 &&
+                          itm.displayValue
+                            .split(" ")
+                            .map((str) => str[0])
+                            .join("")
+                            .toUpperCase()) ||
+                          itm.displayValue}
                       </div>
                     ))}
 
@@ -61,7 +75,28 @@ class CartOutLayItem extends Component {
             ))}
           </div>
         </div>
-        <div className={styles["image-container"]}></div>
+        <div className={styles["image-main-container"]}>
+          <div className={styles["actions-container"]}>
+            <button onClick={this.onItemIncrement.bind(this)}>
+              <div className={styles["button-text"]}>+</div>
+            </button>
+            <div className={styles["quantity"]}>{this.props.quantity}</div>
+            <button onClick={this.onItemDecrement.bind(this)}>
+              <div
+                className={styles["button-text"]}
+                style={{ transform: "translateY(-2px)" }}
+              >
+                -
+              </div>
+            </button>
+          </div>
+          <div className={styles["image-container"]}>
+            <img
+              src={this.props.itemData.gallery[0]}
+              alt={this.props.itemData.name}
+            />
+          </div>
+        </div>
       </div>
     );
   }
