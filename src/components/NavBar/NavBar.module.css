@@ -4,12 +4,15 @@
 }
 
 .nav-bar-container {
-  height: 80px;
-  width: 100%;
-  margin-bottom: 20px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  height: 80px;
+  width: 100%;
+  margin-bottom: 20px;
+  z-index: 1;
+  background-color: #fff;
 }
 
 .container {

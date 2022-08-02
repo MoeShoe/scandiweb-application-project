@@ -2,6 +2,7 @@ import { Component } from "react";
 
 import styles from "./Button.module.css";
 
+// it's the only UI component that i found suitable to be reusable across the app
 class Button extends Component {
   render() {
     return (

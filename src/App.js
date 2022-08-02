@@ -41,10 +41,26 @@ class App extends Component {
             <div>404!</div>
           </Route>
         </Switch>
+        {this.props.showLayout && (
+          <div
+            style={{
+              position: "fixed",
+              top: "0",
+              left: "0",
+              height: "100%",
+              width: "100%",
+              backgroundColor: "rgba(57, 55, 72, 0.22)",
+            }}
+          ></div>
+        )}
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  showLayout: state.ui.showCartOutlay,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   initializeWebApp() {
@@ -55,4 +71,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
