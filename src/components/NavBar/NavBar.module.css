@@ -74,7 +74,7 @@
 }
 
 .cart-action:after {
-  content: attr("data-cart-items-count");
+  content: attr(data-cart-item-count);
   position: absolute;
   display: flex;
   align-items: center;

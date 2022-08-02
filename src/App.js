@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar/NavBar";
 import ProductListingPage from "./pages/ProductListingPage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import CartPage from "./pages/CartPage";
+
 import { uiActions } from "./store/ui-slice/ui-slice";
 
 class App extends Component {
@@ -17,7 +18,7 @@ class App extends Component {
 
   pageClickHandler(e) {
     //Guard Clause
-    // if the user clicks on the OverLay itself, it won't close
+    // if the user clicks on the Overlay itself, it won't close
     if (e.target.closest("[data-isaction]")) return;
 
     this.props.closeAllOverLays();

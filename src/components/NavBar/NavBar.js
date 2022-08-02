@@ -44,6 +44,10 @@ class NavBar extends Component {
   }
 
   render() {
+    const itemCount = this.props.cartData.reduce(
+      (acc, itm) => acc + itm.quantity,
+      0
+    );
     return (
       <div className={styles["nav-bar-container"]}>
         {/* Categories */}
@@ -100,9 +104,12 @@ class NavBar extends Component {
             )}
           </div>
           <div
-            className={styles["action"]}
+            className={`${styles["action"]} ${
+              itemCount ? styles["cart-action"] : ""
+            } `}
             onClick={this.cartClickHandler.bind(this)}
             data-isaction
+            data-cart-item-count={itemCount}
           >
             <Cart />
             {this.props.showCartOverLay && (
