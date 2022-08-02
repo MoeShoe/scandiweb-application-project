@@ -6,12 +6,16 @@ import Button from "../UI/Button";
 class ProductForm extends Component {
   constructor(props) {
     super(props);
+
+    // state that tracks selected attributes
     this.state = {
-      selectedAttributes: [],
+      selectedAttributes: [], // { id, selectedAttribute }[]
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
+    /* populates the selected attributes list when the component first loads,
+     it selects the first value on each attribute by default */
     if (
       prevProps.formData?.attributes?.length &&
       prevProps.formData?.attributes?.length !==
@@ -33,17 +37,22 @@ class ProductForm extends Component {
     const attrIndex = this.state.selectedAttributes.findIndex(
       (attr) => attr.id === attrData.attrId
     );
-    const newAttrState = this.state.selectedAttributes.slice();
+
+    // creates a copy of our state
+    const newAttrState = this.state.selectedAttributes.slice(); // a shallow one will suffice, our state isn't nested deeply
+
+    // new desired state
     newAttrState[attrIndex] = {
       id: attrData.attrId,
       selectedAttribute: attrData.item,
     };
 
+    // set the new state
     this.setState({ selectedAttributes: newAttrState });
   }
 
   addProductClickHandler() {
-    this.props.onProductAdd(this.state.selectedAttributes);
+    this.props.addProductHandler(this.state.selectedAttributes);
   }
 
   render() {
@@ -59,15 +68,21 @@ class ProductForm extends Component {
 
     return (
       <div className={styles["description-list-container"]}>
+        {/* Name and Brand */}
         <div className={styles["brand"]}>{brand}</div>
         <div className={styles["name"]}>{name}</div>
+
+        {/* Attributes */}
         <div className={styles["attributes-main-container"]}>
+          {/* Attribute title */}
           {attributes?.map((attr) => (
             <div className={styles["attribute-container"]} key={attr.id}>
               <div className={styles["detail-title"]}>
                 {attr.name.toUpperCase()}:
               </div>
+              {/* Attribute select */}
               <div className={styles["attribute-select-container"]}>
+                {/* if Attribute type text */}
                 {attr.type === "text" &&
                   attr.items.map((itm) => (
                     <div
@@ -89,6 +104,7 @@ class ProductForm extends Component {
                     </div>
                   ))}
 
+                {/* if Attribute type swatch */}
                 {attr.type === "swatch" &&
                   attr.items.map((itm) => (
                     <div
@@ -112,6 +128,8 @@ class ProductForm extends Component {
             </div>
           ))}
         </div>
+
+        {/* Price */}
         <div className={styles["price-container"]}>
           <div className={styles["detail-title"]}>PRICE:</div>
           <div className={styles["price"]}>
@@ -122,6 +140,9 @@ class ProductForm extends Component {
             }`}
           </div>
         </div>
+
+        {/* Buttons */}
+        {/* if product available */}
         {inStock && (
           <Button
             className={styles["button"]}
@@ -130,6 +151,8 @@ class ProductForm extends Component {
             ADD TO CART
           </Button>
         )}
+
+        {/* if product out of stock */}
         {!inStock && (
           <Button
             className={`${styles["button"]} ${styles["out-of-stock-button"]}`}
@@ -137,6 +160,8 @@ class ProductForm extends Component {
             OUT OF STOCK
           </Button>
         )}
+
+        {/* Product description */}
         <div
           className={styles["description-container"]}
           /* really only dangerous when inserting from an unknown source */

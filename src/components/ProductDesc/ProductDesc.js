@@ -5,21 +5,20 @@ import ProductImages from "./ProductImages";
 import ProductForm from "./ProductForm";
 
 class ProductDesc extends Component {
-  $onProductAdd(selectedAttributes) {
-    this.props.onProductAdd(selectedAttributes);
-  }
-
   render() {
     const { gallery, ...formData } = this.props.productData;
     return (
       <div className={styles["product-desc-container"]}>
+        {/* Displays product images */}
         <ProductImages imagesList={gallery} />
+
+        {/* Displays product details and select attributes */}
         <ProductForm
           formData={{
             ...formData,
             currentCurrency: this.props.currentCurrency,
           }}
-          onProductAdd={this.$onProductAdd.bind(this)}
+          addProductHandler={this.props.addProductHandler}
         />
       </div>
     );

@@ -5,10 +5,13 @@ import styles from "./ProductImages.module.css";
 class ProductImages extends Component {
   constructor(props) {
     super(props);
+
+    //state that tracks current image
     this.state = { currentImage: this.props?.imagesList?.at(0) };
   }
 
   componentDidUpdate(prevProps) {
+    // because imageList is initialy empty, we need this
     if (prevProps.imagesList?.at(0) !== this.props.imagesList?.at(0))
       this.setState({ currentImage: this.props?.imagesList?.at(0) });
   }
@@ -20,6 +23,7 @@ class ProductImages extends Component {
   render() {
     return (
       <>
+        {/* Product images list */}
         <div className={styles["images-container"]}>
           {this.props.imagesList?.map((img, i) => (
             /* i know it is discouraged to use indexes as keys, but in this particular case
@@ -33,6 +37,8 @@ class ProductImages extends Component {
             </div>
           ))}
         </div>
+
+        {/* Main product image */}
         <div className={styles["main-image-container"]}>
           <img src={this.state.currentImage} alt="product" />
         </div>
