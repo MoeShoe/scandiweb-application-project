@@ -6,37 +6,35 @@ import CartOverlayItem from "./CartOverlayItem";
 import Button from "../UI/Button";
 
 class CartOverlay extends Component {
-  itemIncrementHandler(productId) {
-    this.props.onCartItemIncrement(productId);
-  }
-
-  itemDecrementHandler(productId) {
-    this.props.onCartItemDecrement(productId);
-  }
-
   render() {
     return (
       <div
         className={`${styles["cart-overlay-container"]} custom-scrollbar-container`}
         id="overlay"
       >
+        {/* Header */}
         <div className={styles["header"]}>
-          <div className={styles["bag"]}>My Bag,</div>{" "}
+          <span className={styles["bag"]}>My Bag,</span>{" "}
           {this.props.cartData.reduce((acc, item) => acc + item.quantity, 0)}{" "}
           items
         </div>
+
+        {/* Content */}
         <div className={styles["cart-items-container"]}>
+          {/* This show when the cart is empty */}
           {this.props.cartData.length === 0 && (
             <div className={styles["empty-cart"]}>Start Shopping Now!</div>
           )}
+
+          {/* Renders products in the cart state into CartOverlayItem components */}
           {this.props.cartData.map((itm) => (
             <CartOverlayItem
               itemData={itm.item}
               itemSelectedAttributes={itm.selectedAttributes}
               quantity={itm.quantity}
               currentCurrency={this.props.currentCurrency}
-              itemIncrementHandler={this.itemIncrementHandler.bind(this)}
-              itemDecrementHandler={this.itemDecrementHandler.bind(this)}
+              itemIncrementHandler={this.props.onCartItemIncrement}
+              itemDecrementHandler={this.props.onCartItemDecrement}
               key={itm.item.id}
             />
           ))}
@@ -58,6 +56,8 @@ class CartOverlay extends Component {
               .toFixed(2)}`}
           </div>
         </div>
+
+        {/* Actions section */}
         <div className={styles["actions-container"]}>
           <Link to="/cart">
             <Button className={styles["view-bag-button"]} id="view-bag">

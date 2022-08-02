@@ -12,24 +12,34 @@ class CartOverLayItem extends Component {
   }
 
   render() {
+    const { brand, name, prices, attributes, gallery } = this.props.itemData;
+
     return (
       <div className={styles["cart-item-container"]}>
         <div className={styles["data-container"]}>
+          {/* Name and Brand */}
           <div className={styles["header-container"]}>
-            {this.props.itemData.brand} <br />
-            {this.props.itemData.name}
+            {brand} <br />
+            {name}
           </div>
+
+          {/* Price */}
           <div className={styles["price"]}>{`${
             this.props.currentCurrency.symbol
           }${
-            this.props.itemData.prices.find(
+            prices.find(
               (pri) => pri.currency.label === this.props.currentCurrency.label
             ).amount
           }`}</div>
+
+          {/* Attributes rendered dynamically */}
           <div className={styles["attributes-main-container"]}>
-            {this.props.itemData.attributes.map((attr) => (
+            {/* Attribute title */}
+            {attributes.map((attr) => (
               <div className={styles["attribute-container"]} key={attr.id}>
                 <div className={styles["detail-title"]}>{attr.name}:</div>
+
+                {/* if Text attribute */}
                 <div className={styles["attribute-select-container"]}>
                   {attr.type === "text" &&
                     attr.items.map((itm) => (
@@ -44,6 +54,8 @@ class CartOverLayItem extends Component {
                         }`}
                         key={itm.id}
                       >
+                        {/* If the visibleText property is too long, 
+                        it gets refactored into something more managable here */}
                         {(!parseInt(itm.displayValue) &&
                           itm.displayValue.length > 3 &&
                           itm.displayValue
@@ -55,6 +67,7 @@ class CartOverLayItem extends Component {
                       </div>
                     ))}
 
+                  {/* if Swatch attribute */}
                   {attr.type === "swatch" &&
                     attr.items.map((itm) => (
                       <div
@@ -75,7 +88,9 @@ class CartOverLayItem extends Component {
             ))}
           </div>
         </div>
+
         <div className={styles["image-main-container"]}>
+          {/* Increment and Decrement actions */}
           <div className={styles["actions-container"]}>
             <button onClick={this.onItemIncrement.bind(this)}>
               <div className={styles["button-text"]}>+</div>
@@ -90,11 +105,10 @@ class CartOverLayItem extends Component {
               </div>
             </button>
           </div>
+
+          {/* Image */}
           <div className={styles["image-container"]}>
-            <img
-              src={this.props.itemData.gallery[0]}
-              alt={this.props.itemData.name}
-            />
+            <img src={gallery[0]} alt={name} />
           </div>
         </div>
       </div>

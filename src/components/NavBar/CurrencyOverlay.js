@@ -6,6 +6,7 @@ class CurrencyToolTip extends Component {
   render() {
     return (
       <div className={styles["currency-overlay-container"]} id="overlay">
+        {/* Renders the list of available currencies that were fetched from the backend */}
         {this.props.listOfCurrencies.map((cur) => (
           <div
             className={styles["currency-select"]}
