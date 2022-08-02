@@ -17,10 +17,10 @@ class App extends Component {
 
   pageClickHandler(e) {
     //Guard Clause
-    // if the user clicks on the outlay itself, it won't close
+    // if the user clicks on the OverLay itself, it won't close
     if (e.target.closest("[data-isaction]")) return;
 
-    this.props.closeAllOutlays();
+    this.props.closeAllOverLays();
   }
 
   render() {
@@ -59,15 +59,15 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  showLayout: state.ui.showCartOutlay,
+  showLayout: state.ui.showCartOverLay,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   initializeWebApp() {
     dispatch(initializeProductPage());
   },
-  closeAllOutlays() {
-    dispatch(uiActions.closeAllOutlays());
+  closeAllOverLays() {
+    dispatch(uiActions.closeAllOverLays());
   },
 });
 

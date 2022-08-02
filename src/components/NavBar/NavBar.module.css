@@ -73,6 +73,26 @@
   cursor: pointer;
 }
 
+.cart-action:after {
+  content: attr("data-cart-items-count");
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -10px;
+  right: -8px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #1d1f22;
+  font-family: "Roboto", sans-serif;
+  font-size: 700;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #fff;
+}
+
 /* special cases added to match design */
 .action span {
   display: inline-block;

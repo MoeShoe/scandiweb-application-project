@@ -2,7 +2,7 @@ import { Component } from "react";
 
 import styles from "./CartOverlayItem.module.css";
 
-class CartOutLayItem extends Component {
+class CartOverLayItem extends Component {
   onItemIncrement() {
     this.props.itemIncrementHandler(this.props.itemData.id);
   }
@@ -102,4 +102,4 @@ class CartOutLayItem extends Component {
   }
 }
 
-export default CartOutLayItem;
+export default CartOverLayItem;

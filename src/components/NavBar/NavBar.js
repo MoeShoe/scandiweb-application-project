@@ -23,10 +23,10 @@ class NavBar extends Component {
 
   currencyClickHandler(e) {
     //Guard Clause
-    // outlay will not close if the user clicks on its scrollbar thanks to this
+    // OverLay will not close if the user clicks on its scrollbar thanks to this
     if (e.target.closest("#overlay")) return;
 
-    this.props.toggleCurrencyOutlay();
+    this.props.toggleCurrencyOverLay();
   }
 
   currencySelectHandler = (cur) => {
@@ -34,13 +34,13 @@ class NavBar extends Component {
     if (cur.label === this.props.currentCurrency.label) return;
 
     this.props.setCurrency(cur);
-    this.props.toggleCurrencyOutlay();
+    this.props.toggleCurrencyOverLay();
   };
 
   cartClickHandler(e) {
     if (e.target.closest("#overlay") && !(e.target.id === "view-bag")) return;
 
-    this.props.toggleCartOutlay();
+    this.props.toggleCartOverLay();
   }
 
   render() {
@@ -87,12 +87,12 @@ class NavBar extends Component {
             {this.props.currentCurrency.symbol}{" "}
             <span
               className={`${
-                this.props.showCurrencyOutlay ? styles["flip-symbol"] : ""
+                this.props.showCurrencyOverLay ? styles["flip-symbol"] : ""
               }`}
             >
               &#8964;
             </span>
-            {this.props.showCurrencyOutlay && (
+            {this.props.showCurrencyOverLay && (
               <CurrencyOverlay
                 listOfCurrencies={this.props.listOfCurrencies}
                 onCurrencyClick={this.currencySelectHandler.bind(this)}
@@ -105,7 +105,7 @@ class NavBar extends Component {
             data-isaction
           >
             <Cart />
-            {this.props.showCartOutlay && (
+            {this.props.showCartOverLay && (
               <CartOverlay
                 cartData={this.props.cartData}
                 currentCurrency={this.props.currentCurrency}
@@ -125,8 +125,8 @@ const mapStateToProps = (state) => ({
   listOfCategories: state.productList.category.listOfCategories,
   currentCurrency: state.productList.currency.currentCurrency,
   listOfCurrencies: state.productList.currency.listOfCurrencies,
-  showCurrencyOutlay: state.ui.showCurrencyOutlay,
-  showCartOutlay: state.ui.showCartOutlay,
+  showCurrencyOverLay: state.ui.showCurrencyOverLay,
+  showCartOverLay: state.ui.showCartOverLay,
   cartData: state.cart.products,
 });
 
@@ -147,12 +147,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(cartActions.decrementItemCount(productId));
   },
 
-  toggleCurrencyOutlay() {
-    dispatch(uiActions.toggleCurrencyOutlay());
+  toggleCurrencyOverLay() {
+    dispatch(uiActions.toggleCurrencyOverLay());
   },
 
-  toggleCartOutlay() {
-    dispatch(uiActions.toggleCartOutlay());
+  toggleCartOverLay() {
+    dispatch(uiActions.toggleCartOverLay());
   },
 });
 

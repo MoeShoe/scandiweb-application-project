@@ -1,26 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const uiSliceInitialState = {
-  showCurrencyOutlay: false,
-  showCartOutlay: false,
+  showCurrencyOverLay: false,
+  showCartOverLay: false,
 };
 
 const uiSlice = createSlice({
   name: "ui",
   initialState: uiSliceInitialState,
   reducers: {
-    toggleCurrencyOutlay(state) {
-      state.showCurrencyOutlay = !state.showCurrencyOutlay;
-      state.showCartOutlay = false;
+    toggleCurrencyOverLay(state) {
+      state.showCurrencyOverLay = !state.showCurrencyOverLay;
+      state.showCartOverLay = false;
     },
 
-    toggleCartOutlay(state) {
-      state.showCartOutlay = !state.showCartOutlay;
-      state.showCurrencyOutlay = false;
+    toggleCartOverLay(state) {
+      state.showCartOverLay = !state.showCartOverLay;
+      state.showCurrencyOverLay = false;
     },
 
-    closeAllOutlays(state) {
-      state.showCartOutlay = state.showCurrencyOutlay = false;
+    closeAllOverLays(state) {
+      state.showCartOverLay = state.showCurrencyOverLay = false;
     },
   },
 });
