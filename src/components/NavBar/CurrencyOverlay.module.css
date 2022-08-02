@@ -4,9 +4,7 @@
   left: 50%;
   transform: translate(calc(-50% + 19px), calc(100% + 8px));
   width: 114px;
-  max-height: 200px;
   padding: 17px 0;
-  overflow-y: auto;
   z-index: 1;
   cursor: default;
   background-color: #fff;

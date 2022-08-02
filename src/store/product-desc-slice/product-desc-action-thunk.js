@@ -2,10 +2,14 @@ import { request, gql } from "graphql-request";
 
 import { API_ENDPOINT } from "../../constants/constants";
 import { productDescActions } from "./product-desc-slice";
+import { cartActions } from "../cart-slice/cart-slice";
 
-const fetchProductDescription = (productId) => async (dispatch) => {
-  try {
-    const query = gql`{
+const fetchProductDescription =
+  (productId, addToCart = false) =>
+  async (dispatch) => {
+    //addToCart arg decides whether to add product to the cart immediately or not after it gets fetched
+    try {
+      const query = gql`{
         product(id:"${productId}") {
             id
             name
@@ -18,19 +22,30 @@ const fetchProductDescription = (productId) => async (dispatch) => {
         }
     }`;
 
-    const data = await request(API_ENDPOINT, query);
+      const data = await request(API_ENDPOINT, query);
 
-    /* a condition that checks whether the product exists, for example if the
-     user enters a random product url like: /products/lee_ghandi's_nuts */
-    if (!data.product) {
-      dispatch(productDescActions.setProductIsNotFound(true));
-      return;
+      /* a condition that checks whether the product exists, for example if the
+     user enters a random product url like: /products/ICBM */
+      if (!data.product) {
+        dispatch(productDescActions.setProductIsNotFound(true));
+        return;
+      }
+
+      if (addToCart) {
+        dispatch(
+          cartActions.addItemToCart({
+            item: data.product,
+            quantity: 1,
+            selectedAttributes: [],
+          })
+        );
+        return;
+      }
+
+      dispatch(productDescActions.setProductDesc(data.product));
+    } catch (err) {
+      console.error(err.message);
     }
-
-    dispatch(productDescActions.setProductDesc(data.product));
-  } catch (err) {
-    console.error(err.message);
-  }
-};
+  };
 
 export { fetchProductDescription };

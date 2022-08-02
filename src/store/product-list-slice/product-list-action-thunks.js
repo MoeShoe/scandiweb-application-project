@@ -54,11 +54,14 @@ const fetchProductList = (category) => async (dispatch) => {
               amount
             }
             gallery
+            attributes {type}
             inStock
           }
         }
       }  
 `;
+    /* we also need to fetch the attributes to know whether we can add 
+the product to the cart directly or not when the green cart button is clicked */
 
     const data = await request(API_ENDPOINT, query);
 

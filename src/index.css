@@ -11,6 +11,7 @@ a {
 }
 
 /* custom scroll bar css */
+/* i put it here because it's best practice for reusability */
 
 .custom-scrollbar-container::-webkit-scrollbar {
   width: 6px;

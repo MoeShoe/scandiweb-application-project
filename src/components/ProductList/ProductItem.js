@@ -4,8 +4,20 @@ import { withRouter } from "react-router-dom";
 import styles from "./ProductItem.module.css";
 
 class CategoryItem extends Component {
-  productClickHandler() {
+  productClickHandler(e) {
+    //Guard Clause
+    if (e?.target?.closest(`.${styles["add-product-to-cart-button"]}`)) return;
+
     this.props.history.push(`/products/${this.props.productId}`);
+  }
+
+  addProductHandler() {
+    if (this.props.productData.attributes.length === 0) {
+      this.props.addProductHandler(this.props.productId, true);
+      return;
+    }
+
+    this.productClickHandler();
   }
 
   render() {
@@ -19,6 +31,10 @@ class CategoryItem extends Component {
       >
         <div className={styles["image-container"]}>
           <img src={img} alt="a pic" />
+          <div
+            className={styles["add-product-to-cart-button"]}
+            onClick={this.addProductHandler.bind(this)}
+          ></div>
         </div>
         <div className={styles["product-details"]}>
           <div className={styles["product-name"]}>{`${brand} ${name}`}</div>

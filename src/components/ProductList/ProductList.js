@@ -25,8 +25,10 @@ class ProductList extends Component {
                     ).amount
                   }`,
                   img: prod.gallery.at(0),
+                  attributes: prod.attributes,
                   inStock: prod.inStock,
                 }}
+                addProductHandler={this.props.addProductHandler}
                 productId={prod.id}
                 key={prod.id}
               />
