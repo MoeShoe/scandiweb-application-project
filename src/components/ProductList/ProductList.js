@@ -18,6 +18,7 @@ class ProductList extends Component {
               <ProductItem
                 productData={{
                   name: prod.name,
+                  brand: prod.brand,
                   amount: `${this.props.currency.symbol}${
                     prod.prices.find(
                       (amt) => amt.currency.label === this.props.currency.label

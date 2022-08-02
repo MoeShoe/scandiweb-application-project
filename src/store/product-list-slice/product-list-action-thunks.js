@@ -44,6 +44,7 @@ const fetchProductList = (category) => async (dispatch) => {
         category(input: {title :"${category}"}) {
           products {
             name
+            brand
             id
             prices {
               currency {

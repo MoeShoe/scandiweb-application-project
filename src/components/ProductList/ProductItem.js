@@ -9,7 +9,7 @@ class CategoryItem extends Component {
   }
 
   render() {
-    const { name, img, amount, inStock } = this.props.productData;
+    const { name, brand, img, amount, inStock } = this.props.productData;
     return (
       <div
         className={`${styles["product-item-container"]} ${
@@ -21,7 +21,7 @@ class CategoryItem extends Component {
           <img src={img} alt="a pic" />
         </div>
         <div className={styles["product-details"]}>
-          <div className={styles["product-name"]}>{name}</div>
+          <div className={styles["product-name"]}>{`${brand} ${name}`}</div>
           <div className={styles["product-price"]}>{amount}</div>
         </div>
       </div>
