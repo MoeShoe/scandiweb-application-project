@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* custom scroll bar css */
 
 .custom-scrollbar-container::-webkit-scrollbar {

@@ -3,6 +3,7 @@
   top: calc(100% + 30px);
   right: -30px;
   width: 325px;
+  max-height: 677px;
   padding: 32px 16px;
   background-color: #fff;
   z-index: 1;

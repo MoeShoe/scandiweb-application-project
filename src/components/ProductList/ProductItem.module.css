@@ -34,12 +34,7 @@
 }
 
 .product-out-of-stock {
-  cursor: default;
   opacity: 0.5;
-}
-
-.product-out-of-stock:hover {
-  box-shadow: none;
 }
 
 .product-out-of-stock .image-container:before {
