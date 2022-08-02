@@ -64,7 +64,7 @@
   margin-right: 60px;
 }
 
-.action {
+.action-icon {
   position: relative;
   display: flex;
   font-weight: 500;
@@ -94,7 +94,7 @@
 }
 
 /* special cases added to match design */
-.action span {
+.action-icon span {
   display: inline-block;
   transform: translate(4px, -2px);
 }
@@ -103,20 +103,20 @@
   transform: translate(4px, 5px) rotate(180deg) !important;
 }
 
-.action g {
+.action-icon g {
   fill: #43464e;
 }
 
-.action:hover,
-.action:hover span,
-.action:hover g {
+.action-icon:hover,
+.action-icon:hover span,
+.action-icon:hover g {
   color: var(--hover-color);
   fill: var(--hover-color);
 }
 
 .category,
-.action,
-.action span,
-.action g {
+.action-icon,
+.action-icon span,
+.action-icon g {
   transition: color 350ms, fill 150ms;
 }

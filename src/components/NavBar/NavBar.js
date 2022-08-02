@@ -2,13 +2,13 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { fetchProductList } from "../../store/product-list-slice/product-list-action-thunks";
-
 import styles from "./NavBar.module.css";
-import { ReactComponent as Logo } from "../../assets/web-app-logo.svg";
-import { ReactComponent as Cart } from "../../assets/cart.svg";
 import CurrencyOverlay from "./CurrencyOverlay";
 import CartOverlay from "./CartOverlay";
+import { ReactComponent as Logo } from "../../assets/web-app-logo.svg";
+import { ReactComponent as Cart } from "../../assets/cart.svg";
+
+import { fetchProductList } from "../../store/product-list-slice/product-list-action-thunks";
 import { cartActions } from "../../store/cart-slice/cart-slice";
 import { productListActions } from "../../store/product-list-slice/product-list-slice";
 import { uiActions } from "../../store/ui-slice/ui-slice";
@@ -38,6 +38,7 @@ class NavBar extends Component {
   };
 
   cartClickHandler(e) {
+    // Cart overlay also closes when the user click viewbag button
     if (e.target.closest("#overlay") && !(e.target.id === "view-bag")) return;
 
     this.props.toggleCartOverLay();
@@ -57,7 +58,8 @@ class NavBar extends Component {
           className={`${styles["container"]} ${styles["categories-container"]}`}
         >
           {this.props.listOfCategories.map((cat) => (
-            <div
+            <Link
+              to="/"
               className={`${styles["category"]} ${
                 this.props.currentCategory === cat.name &&
                 styles["category-active"]
@@ -66,7 +68,7 @@ class NavBar extends Component {
               key={cat.name}
             >
               {cat.name.toUpperCase()}
-            </div>
+            </Link>
           ))}
         </div>
 
@@ -83,19 +85,22 @@ class NavBar extends Component {
         <div
           className={`${styles["container"]} ${styles["actions-container"]}`}
         >
+          {/* Change currency action */}
           <div
             className={styles["action"]}
             onClick={this.currencyClickHandler.bind(this)}
-            data-isaction
+            data-isaction // used to prevent close overlay event from happening
           >
-            {this.props.currentCurrency.symbol}{" "}
-            <span
-              className={`${
-                this.props.showCurrencyOverLay ? styles["flip-symbol"] : ""
-              }`}
-            >
-              &#8964;
-            </span>
+            <div className={styles["action-icon"]}>
+              {this.props.currentCurrency.symbol}{" "}
+              <span
+                className={`${
+                  this.props.showCurrencyOverLay ? styles["flip-symbol"] : ""
+                }`}
+              >
+                &#8964;
+              </span>
+            </div>
             {this.props.showCurrencyOverLay && (
               <CurrencyOverlay
                 listOfCurrencies={this.props.listOfCurrencies}
@@ -103,15 +108,24 @@ class NavBar extends Component {
               />
             )}
           </div>
+
+          {/* Open mini-cart action */}
           <div
-            className={`${styles["action"]} ${
-              itemCount ? styles["cart-action"] : ""
-            } `}
+            className={styles["action"]}
             onClick={this.cartClickHandler.bind(this)}
             data-isaction
-            data-cart-item-count={itemCount}
           >
-            <Cart />
+            <div
+              className={`${styles["action-icon"]} ${
+                //hides the item count if it's 0
+                itemCount ? styles["cart-action"] : ""
+              } `}
+              // cart count is a pseudo element that uses this attribute to show its value
+              data-cart-item-count={itemCount}
+            >
+              <Cart />
+            </div>
+
             {this.props.showCartOverLay && (
               <CartOverlay
                 cartData={this.props.cartData}
@@ -128,12 +142,16 @@ class NavBar extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  // categories state
   currentCategory: state.productList.category.currentCategory,
   listOfCategories: state.productList.category.listOfCategories,
+  //currencies state
   currentCurrency: state.productList.currency.currentCurrency,
   listOfCurrencies: state.productList.currency.listOfCurrencies,
+  //UI state
   showCurrencyOverLay: state.ui.showCurrencyOverLay,
   showCartOverLay: state.ui.showCartOverLay,
+  //Cart State
   cartData: state.cart.products,
 });
 
