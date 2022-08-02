@@ -9,6 +9,7 @@ class Button extends Component {
         className={`${styles["button"]} ${this.props.className}`}
         onClick={this.props.onClick}
         disabled={this.props.disabled || false}
+        id={this.props.id}
       >
         {this.props.children}
       </button>

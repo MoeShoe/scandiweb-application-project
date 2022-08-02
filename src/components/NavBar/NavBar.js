@@ -34,10 +34,11 @@ class NavBar extends Component {
     if (cur.label === this.props.currentCurrency.label) return;
 
     this.props.setCurrency(cur);
+    this.props.toggleCurrencyOutlay();
   };
 
   cartClickHandler(e) {
-    if (e.target.closest("#overlay")) return;
+    if (e.target.closest("#overlay") && !(e.target.id === "view-bag")) return;
 
     this.props.toggleCartOutlay();
   }

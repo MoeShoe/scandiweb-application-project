@@ -1,7 +1,9 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./CartOverlay.module.css";
 import CartOverlayItem from "./CartOverlayItem";
+import Button from "../UI/Button";
 
 class CartOverlay extends Component {
   itemIncrementHandler(productId) {
@@ -13,7 +15,6 @@ class CartOverlay extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div
         className={`${styles["cart-overlay-container"]} custom-scrollbar-container`}
@@ -25,6 +26,9 @@ class CartOverlay extends Component {
           items
         </div>
         <div className={styles["cart-items-container"]}>
+          {this.props.cartData.length === 0 && (
+            <div className={styles["empty-cart"]}>Start Shopping Now!</div>
+          )}
           {this.props.cartData.map((itm) => (
             <CartOverlayItem
               itemData={itm.item}
@@ -36,6 +40,36 @@ class CartOverlay extends Component {
               key={itm.item.id}
             />
           ))}
+        </div>
+        <div className={styles["total-container"]}>
+          <div className={styles["total-header"]}>Total</div>
+          <div className={styles["price"]}>
+            {`${this.props.currentCurrency.symbol}${this.props.cartData
+              .reduce(
+                (acc, product) =>
+                  acc +
+                  product.quantity *
+                    product.item.prices.find(
+                      (pri) =>
+                        pri.currency.label === this.props.currentCurrency.label
+                    ).amount,
+                0
+              )
+              .toFixed(2)}`}
+          </div>
+        </div>
+        <div className={styles["actions-container"]}>
+          <Link to="/cart">
+            <Button className={styles["view-bag-button"]} id="view-bag">
+              VIEW BAG
+            </Button>
+          </Link>
+          <Button
+            className={styles["checkout-button"]}
+            disabled={this.props.cartData.length === 0}
+          >
+            CHECK OUT
+          </Button>
         </div>
       </div>
     );
