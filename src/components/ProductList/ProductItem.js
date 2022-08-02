@@ -1,19 +1,20 @@
 import { Component } from "react";
-import { withRouter } from "react-router-dom";
 
 import styles from "./ProductItem.module.css";
 
 class CategoryItem extends Component {
   productClickHandler(e) {
     //Guard Clause
+    // prevents this event from running when the user clicks the green add to cart button
     if (e?.target?.closest(`.${styles["add-product-to-cart-button"]}`)) return;
-
-    this.props.history.push(`/products/${this.props.productId}`);
+    this.props.productClickHandler(this.props.productData.id);
   }
 
   addProductHandler() {
+    /* checks if the product has no attributes. if it does not, it gets added to the cart immediately
+    else the user gets forwarded into the product's PDP dynamic route to choose its attributes */
     if (this.props.productData.attributes.length === 0) {
-      this.props.addProductHandler(this.props.productId, true);
+      this.props.addProductHandler(this.props.productData.id, true);
       return;
     }
 
@@ -29,6 +30,7 @@ class CategoryItem extends Component {
         }`}
         onClick={this.productClickHandler.bind(this)}
       >
+        {/* Product image */}
         <div className={styles["image-container"]}>
           <img src={img} alt="a pic" />
           <div
@@ -36,6 +38,8 @@ class CategoryItem extends Component {
             onClick={this.addProductHandler.bind(this)}
           ></div>
         </div>
+
+        {/* Product description */}
         <div className={styles["product-details"]}>
           <div className={styles["product-name"]}>{`${brand} ${name}`}</div>
           <div className={styles["product-price"]}>{amount}</div>
@@ -45,4 +49,4 @@ class CategoryItem extends Component {
   }
 }
 
-export default withRouter(CategoryItem);
+export default CategoryItem;

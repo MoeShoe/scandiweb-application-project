@@ -2,7 +2,6 @@
   margin: 50px 20px;
   width: 386px;
   cursor: pointer;
-  box-shadow: 0px 0px 0px rgba(168, 172, 176, 0.19);
 }
 
 .product-item-container:hover {
@@ -10,7 +9,6 @@
 }
 
 .image-container {
-  /* as in the figma design */
   position: relative;
   width: 356px;
   height: 338px;
@@ -18,7 +16,7 @@
 }
 
 .add-product-to-cart-button {
-  display: none;
+  display: none; /* so we can display it conditionally */
   position: absolute;
   bottom: 0;
   right: 0;
@@ -57,7 +55,7 @@
 .image-container img {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: cover; /* i went for cover to encompass all image resolutions */
 }
 
 .product-details {
