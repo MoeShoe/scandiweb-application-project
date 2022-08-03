@@ -14,6 +14,13 @@ class CartPage extends Component {
     this.props.onDecrementItem(itemId);
   }
 
+  orderSubmitHandler() {
+    window.alert("purchase successful!");
+    //dispach to a server here in an irl app...
+
+    this.props.onOrderSubmit();
+  }
+
   render() {
     return (
       <CartList
@@ -21,6 +28,7 @@ class CartPage extends Component {
         currentCurrency={this.props.currentCurrency}
         onItemIncrement={this.incrementHandler.bind(this)}
         onItemDecrement={this.decrementHandler.bind(this)}
+        orderSubmitHandler={this.orderSubmitHandler.bind(this)}
       />
     );
   }
@@ -38,6 +46,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   onDecrementItem(itemId) {
     dispatch(cartActions.decrementItemCount(itemId));
+  },
+
+  onOrderSubmit() {
+    dispatch(cartActions.resetCart());
   },
 });
 

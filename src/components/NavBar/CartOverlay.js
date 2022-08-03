@@ -67,6 +67,7 @@ class CartOverlay extends Component {
           <Button
             className={styles["checkout-button"]}
             disabled={this.props.cartData.length === 0}
+            onClick={this.props.orderSubmitHandler}
           >
             CHECK OUT
           </Button>

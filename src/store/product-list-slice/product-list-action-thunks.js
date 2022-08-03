@@ -1,6 +1,7 @@
 import { request, gql } from "graphql-request";
 
 import { API_ENDPOINT } from "../../constants/constants";
+
 import { productListActions } from "./product-list-slice";
 
 // this is meant to run once the user first visits the page
@@ -60,8 +61,6 @@ const fetchProductList = (category) => async (dispatch) => {
         }
       }  
 `;
-    /* we also need to fetch the attributes to know whether we can add 
-the product to the cart directly or not when the green cart button is clicked */
 
     const data = await request(API_ENDPOINT, query);
 

@@ -44,6 +44,12 @@ class NavBar extends Component {
     this.props.toggleCartOverLay();
   }
 
+  orderSubmitHandler() {
+    window.alert("purchase successful!");
+
+    this.props.onOrderSubmit();
+  }
+
   render() {
     const itemCount = this.props.cartData.reduce(
       (acc, itm) => acc + itm.quantity,
@@ -132,6 +138,7 @@ class NavBar extends Component {
                 currentCurrency={this.props.currentCurrency}
                 onCartItemIncrement={this.props.cartIncrementHandler}
                 onCartItemDecrement={this.props.cartDecrementHandler}
+                orderSubmitHandler={this.orderSubmitHandler.bind(this)}
               />
             )}
           </div>
@@ -170,6 +177,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   cartDecrementHandler(productId) {
     dispatch(cartActions.decrementItemCount(productId));
+  },
+
+  onOrderSubmit() {
+    dispatch(cartActions.resetCart());
   },
 
   toggleCurrencyOverLay() {

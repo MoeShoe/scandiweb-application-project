@@ -78,6 +78,7 @@ class CartList extends Component {
           {/* order button*/}
           <Button
             className={styles["order-button"]}
+            onClick={this.props.orderSubmitHandler}
             disabled={this.props.cartData.length === 0}
           >
             ORDER
