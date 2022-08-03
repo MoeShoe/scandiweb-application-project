@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartInitialState = {
   products: [
     // cartItem[]
-    // cartItem {item, quantity, selectedAttibutes}
+    // cartItem : {item, quantity, selectedAttibutes}
   ],
 };
 
@@ -12,6 +12,7 @@ const cartSlice = createSlice({
   initialState: cartInitialState,
   reducers: {
     addItemToCart(state, action) {
+      // detects duplicate
       const indexOfDuplicate = state.products.findIndex(
         (pro) => pro.item.id === action.payload.item.id
       );
