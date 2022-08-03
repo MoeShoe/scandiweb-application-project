@@ -2,24 +2,25 @@ import { Component } from "react";
 import { connect } from "react-redux";
 
 import CartList from "../components/CartList/CartList";
+
 import { cartActions } from "../store/cart-slice/cart-slice";
 
 class CartPage extends Component {
   incrementHandler(itemId) {
-    this.props.incrementItem(itemId);
+    this.props.onIncrementItem(itemId);
   }
 
   decrementHandler(itemId) {
-    this.props.decrementItem(itemId);
+    this.props.onDecrementItem(itemId);
   }
 
   render() {
     return (
       <CartList
         cartData={this.props.cartData}
+        currentCurrency={this.props.currentCurrency}
         onItemIncrement={this.incrementHandler.bind(this)}
         onItemDecrement={this.decrementHandler.bind(this)}
-        currentCurrency={this.props.currentCurrency}
       />
     );
   }
@@ -31,11 +32,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  incrementItem(itemId) {
+  onIncrementItem(itemId) {
     dispatch(cartActions.incrementItemCount(itemId));
   },
 
-  decrementItem(itemId) {
+  onDecrementItem(itemId) {
     dispatch(cartActions.decrementItemCount(itemId));
   },
 });
