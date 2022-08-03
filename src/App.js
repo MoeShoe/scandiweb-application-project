@@ -1,24 +1,25 @@
-import { Switch, Route } from "react-router-dom";
 import { Component } from "react";
+import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
-
-import { initializeProductPage } from "./store/product-list-slice/product-list-action-thunks";
 
 import NavBar from "./components/NavBar/NavBar";
 import ProductListingPage from "./pages/ProductListingPage";
 import ProductDescriptionPage from "./pages/ProductDescriptionPage";
 import CartPage from "./pages/CartPage";
+import Layout from "./components/UI/Layout";
 
+import { initializeProductPage } from "./store/product-list-slice/product-list-action-thunks";
 import { uiActions } from "./store/ui-slice/ui-slice";
 
 class App extends Component {
+  // when the app first loads, this initializes it by fetching the available categories and currencies
   componentDidMount() {
     this.props.initializeWebApp();
   }
 
   pageClickHandler(e) {
     //Guard Clause
-    // if the user clicks on the Overlay itself, it won't close
+    // if the user clicks on the Overlay itself, it won't close because it has data-isaction attribute
     if (e.target.closest("[data-isaction]")) return;
 
     this.props.closeAllOverLays();
@@ -26,34 +27,33 @@ class App extends Component {
 
   render() {
     return (
+      // needed to add this div to attach the event listener to it
       <div onClick={this.pageClickHandler.bind(this)}>
         <NavBar />
         <Switch>
           <Route path="/" exact>
+            {/* PLP */}
             <ProductListingPage />
           </Route>
+
           <Route path="/products/:product" exact>
+            {/* PDP */}
             <ProductDescriptionPage />
           </Route>
+
           <Route path="/cart" exact>
+            {/* cart page */}
             <CartPage />
           </Route>
+
           <Route path="/">
-            <div>404!</div>
+            {/* simple not found page */}
+            <div>Page not Found 404!</div>
           </Route>
         </Switch>
-        {this.props.showLayout && (
-          <div
-            style={{
-              position: "fixed",
-              top: "0",
-              left: "0",
-              height: "100%",
-              width: "100%",
-              backgroundColor: "rgba(57, 55, 72, 0.22)",
-            }}
-          ></div>
-        )}
+
+        {/* Layout */}
+        {this.props.showLayout && <Layout />}
       </div>
     );
   }
