@@ -1,9 +1,7 @@
 .description-list-container {
   width: 25%;
-  max-height: 70vh;
   margin: 0 100px;
   margin-right: 0;
-  overflow: auto;
 }
 
 .brand {
