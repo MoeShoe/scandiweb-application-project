@@ -163,7 +163,7 @@ class ProductForm extends Component {
 
         {/* Product description */}
         <div
-          className={styles["description-container"]}
+          className={`${styles["description-container"]} inserted-product-description`}
           /* really only dangerous when inserting from an unknown source */
           dangerouslySetInnerHTML={{
             __html: description,
