@@ -36,9 +36,6 @@ class ProductDescriptionPage extends Component {
       selectedAttributes,
       quantity: 1, //it's 1 by default, you can change that on the mini-cart or the cart page
     });
-
-    // reroutes user to home page after he's done adding the product
-    this.props.history.push("/");
   }
 
   render() {
