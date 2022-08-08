@@ -21,16 +21,13 @@ const initializeProductPage = () => async (dispatch) => {
 
     const data = await request(API_ENDPOINT, query);
 
+    // sets all available categories and currencies, so nothing is hardcoded and the app is scalable
     dispatch(
       productListActions.initializeProductList({
         categories: data.categories,
         currencies: data.currencies,
       })
     );
-
-    // page defaults
-    dispatch(fetchProductList("all"));
-    dispatch(productListActions.setCurrency({ label: "USD", symbol: "$" }));
   } catch (err) {
     /* very basic error handling without reflecting error state to 
     the UI because it wasn't required in the assignment */
@@ -38,12 +35,13 @@ const initializeProductPage = () => async (dispatch) => {
   }
 };
 
-const fetchProductList = (category) => async (dispatch) => {
+const fetchProductList = () => async (dispatch) => {
   try {
     const query = gql`
       {
-        category(input: {title :"${category}"}) {
+        category(input: { title: "all" }) {
           products {
+            category
             name
             brand
             id
@@ -55,18 +53,28 @@ const fetchProductList = (category) => async (dispatch) => {
               amount
             }
             gallery
-            attributes {type}
             inStock
+            attributes {
+              name
+              type
+              items {
+                displayValue
+                value
+                id
+              }
+              id
+            }
+            description
           }
         }
-      }  
-`;
+      }
+    `;
 
     const data = await request(API_ENDPOINT, query);
 
+    // sets all available products
     dispatch(
       productListActions.setProductList({
-        category,
         products: data.category.products,
       })
     );

@@ -8,9 +8,8 @@ import CartOverlay from "./CartOverlay";
 import { ReactComponent as Logo } from "../../assets/web-app-logo.svg";
 import { ReactComponent as Cart } from "../../assets/cart.svg";
 
-import { fetchProductList } from "../../store/product-list-slice/product-list-action-thunks";
-import { cartActions } from "../../store/cart-slice/cart-slice";
 import { productListActions } from "../../store/product-list-slice/product-list-slice";
+import { cartActions } from "../../store/cart-slice/cart-slice";
 import { uiActions } from "../../store/ui-slice/ui-slice";
 
 class NavBar extends Component {
@@ -164,7 +163,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   setCategory(category) {
-    dispatch(fetchProductList(category));
+    dispatch(productListActions.setCategory(category));
   },
 
   setCurrency(cur) {
