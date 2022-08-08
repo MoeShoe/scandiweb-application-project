@@ -13,12 +13,21 @@ class ProductDescriptionPage extends Component {
     /* when page loads it checks the url for the product id and loads it accordingly,
      this way it allows for passing product URLs around which is a critical feature
       in an IRL project of this kind */
+    if (this.props.productList.length !== 0) {
+      // if the product has been fetched before, it won't refetch
+      const targetProduct = this.props.productList.find(
+        (prod) => prod.id === this.props.match.params.product
+      );
+      this.props.setProductDesc(targetProduct);
+      return;
+    }
+
     this.props.getProductDescription(this.props.match.params.product);
   }
 
   componentWillUnmount() {
     // resets the product description state on page component unmount
-    this.props.pdpUnmountHandler();
+    this.props.setProductDesc({});
   }
 
   addProductToCartHandler(selectedAttributes) {
@@ -52,6 +61,7 @@ class ProductDescriptionPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  productList: state.productList.products,
   productData: state.productDesc.productDesc,
   productNotFound: state.productDesc.productNotFound,
   currentCurrency: state.productList.currency.currentCurrency,
@@ -66,8 +76,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(cartActions.addItemToCart(item));
   },
 
-  pdpUnmountHandler() {
-    dispatch(productDescActions.setProductDesc({}));
+  setProductDesc(desc) {
+    dispatch(productDescActions.setProductDesc(desc));
   },
 });
 

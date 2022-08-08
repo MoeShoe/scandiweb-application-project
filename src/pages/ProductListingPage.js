@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 
 import ProductList from "../components/ProductList/ProductList";
 
-import { fetchProductDescription } from "../store/product-desc-slice/product-desc-action-thunk";
 import { fetchProductList } from "../store/product-list-slice/product-list-action-thunks";
+import { cartActions } from "../store/cart-slice/cart-slice";
 
 class ProductListingPage extends Component {
   componentDidMount() {
@@ -51,8 +51,14 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchProductList());
   },
 
-  addProductToCart(id, addToCart) {
-    dispatch(fetchProductDescription(id, addToCart));
+  addProductToCart(product) {
+    dispatch(
+      cartActions.addItemToCart({
+        item: product,
+        quantity: 1,
+        selectedAttributes: [],
+      })
+    );
   },
 });
 

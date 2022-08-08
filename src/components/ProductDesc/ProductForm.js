@@ -13,17 +13,17 @@ class ProductForm extends Component {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     /* populates the selected attributes list when the component first loads,
      it selects the first value on each attribute by default */
     if (
-      prevProps.formData?.attributes?.length &&
-      prevProps.formData?.attributes?.length !==
+      this.props.formData?.attributes?.length &&
+      this.props.formData?.attributes?.length !==
         prevState.selectedAttributes.length
     ) {
       this.setState({
         selectedAttributes: [
-          ...prevProps.formData?.attributes?.map((attr) => ({
+          ...this.props.formData?.attributes?.map((attr) => ({
             id: attr.id,
             //  by default the first attributes is selected
             selectedAttribute: attr.items.at(0),
@@ -56,15 +56,8 @@ class ProductForm extends Component {
   }
 
   render() {
-    const {
-      brand,
-      name,
-      attributes,
-      prices,
-      description,
-      currentCurrency,
-      inStock,
-    } = this.props.formData;
+    const { brand, name, attributes, prices, description, inStock } =
+      this.props.formData;
 
     return (
       <div className={styles["description-list-container"]}>
@@ -133,9 +126,9 @@ class ProductForm extends Component {
         <div className={styles["price-container"]}>
           <div className={styles["detail-title"]}>PRICE:</div>
           <div className={styles["price"]}>
-            {`${currentCurrency.symbol}${
+            {`${this.props.currentCurrency.symbol}${
               prices?.find(
-                (cur) => cur.currency.label === currentCurrency.label
+                (cur) => cur.currency.label === this.props.currentCurrency.label
               )?.amount
             }`}
           </div>

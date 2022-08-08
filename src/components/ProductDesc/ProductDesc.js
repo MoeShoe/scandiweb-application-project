@@ -14,10 +14,8 @@ class ProductDesc extends Component {
 
         {/* Displays product details and select attributes */}
         <ProductForm
-          formData={{
-            ...formData,
-            currentCurrency: this.props.currentCurrency,
-          }}
+          formData={formData}
+          currentCurrency={this.props.currentCurrency}
           addProductHandler={this.props.addProductHandler}
         />
       </div>

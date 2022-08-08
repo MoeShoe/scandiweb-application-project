@@ -4,6 +4,10 @@ import styles from "./ProductList.module.css";
 import ProductItem from "./ProductItem";
 
 class ProductList extends Component {
+  addProductHandler(product) {
+    this.props.addProductHandler(product);
+  }
+
   render() {
     return (
       <div className={styles["product-list-container"]}>
@@ -28,7 +32,7 @@ class ProductList extends Component {
                 }`,
                 img: prod.gallery.at(0),
               }}
-              addProductHandler={this.props.addProductHandler}
+              addProductHandler={this.addProductHandler.bind(this, prod)}
               productClickHandler={this.props.productClickHandler}
               key={prod.id}
             />
