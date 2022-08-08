@@ -152,15 +152,6 @@
   background-color: #000;
 }
 
-.image-container button:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
-.image-container button:disabled:hover {
-  background-color: rgba(0, 0, 0, 0.73);
-}
-
 .button-left {
   right: 48px;
   transform: rotate(180deg);

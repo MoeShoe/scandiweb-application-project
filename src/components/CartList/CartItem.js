@@ -125,23 +125,26 @@ class CartItem extends Component {
               alt={this.props.itemData.name}
             />
 
-            {/* navigate image left button */}
-            <button
-              className={styles["button-left"]}
-              onClick={this.leftClickHandler.bind(this)}
-              disabled={this.props.itemData.gallery.length === 1}
-            >
-              <ArrowHead />
-            </button>
+            {/* will only show image navigation buttons if there are multiple images */}
+            {this.props.itemData.gallery.length > 1 && (
+              <>
+                {/* navigate image left button */}
+                <button
+                  className={styles["button-left"]}
+                  onClick={this.leftClickHandler.bind(this)}
+                >
+                  <ArrowHead />
+                </button>
 
-            {/* navigate image right button */}
-            <button
-              className={styles["button-right"]}
-              onClick={this.rightClickHandler.bind(this)}
-              disabled={this.props.itemData.gallery.length === 1}
-            >
-              <ArrowHead />
-            </button>
+                {/* navigate image right button */}
+                <button
+                  className={styles["button-right"]}
+                  onClick={this.rightClickHandler.bind(this)}
+                >
+                  <ArrowHead />
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
