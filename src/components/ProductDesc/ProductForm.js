@@ -1,4 +1,5 @@
 import { Component } from "react";
+import DOMPurify from "dompurify";
 
 import styles from "./ProductForm.module.css";
 import Button from "../UI/Button";
@@ -158,9 +159,9 @@ class ProductForm extends Component {
         {/* Product description */}
         <div
           className={`${styles["description-container"]} inserted-product-description`}
-          /* really only dangerous when inserting from an unknown source */
+          /* Injected HTML is santized using DOMPurify to prevent any malicious XSS attacks */
           dangerouslySetInnerHTML={{
-            __html: description,
+            __html: DOMPurify.sanitize(description),
           }}
         ></div>
       </div>
