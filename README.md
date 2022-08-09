@@ -11,7 +11,7 @@
 * It took me around a week to finish this project.
 
 # My second attempt at the assignment and what i learned
-Before I begin, i would like to thank you once more. This time for pointing out the shortcomings of my previous attempt at the assignment, pushing me towards the best coding practices, giving me the chance to be here again and taking the time review this project once more, I really appreciate it. I hope that I have addressed the issues pointed in your review appropriately.
+Before I begin, i would like to thank you once more. This time for pointing out the shortcomings of my previous attempt at the assignment, pushing me towards the best coding practices, giving me the chance to be here again and taking the time to review this project once more, I really appreciate it. I hope that I have addressed the issues pointed in your review appropriately. Anyhow, this whole experience has broadened my prospects as a developer.
 
 ## feedback/ learning points about my submission:
 
