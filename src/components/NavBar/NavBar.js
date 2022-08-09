@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 import styles from "./NavBar.module.css";
 import CurrencyOverlay from "./CurrencyOverlay";
@@ -79,7 +79,6 @@ class NavBar extends Component {
         >
           {this.props.listOfCategories.map((cat) => (
             <div
-              to="/"
               className={`${styles["category"]} ${
                 this.props.currentCategory === cat.name &&
                 styles["category-active"]
@@ -96,9 +95,9 @@ class NavBar extends Component {
         <div
           className={`${styles["container"]} ${styles["web-app-logo-container"]}`}
         >
-          <div to="/">
+          <Link to="/" onClick={() => this.props.setCategory("all")}>
             <Logo />
-          </div>
+          </Link>
         </div>
 
         {/* Actions */}

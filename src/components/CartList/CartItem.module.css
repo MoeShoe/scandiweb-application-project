@@ -118,6 +118,10 @@
   font-size: 53px;
 }
 
+.decrement-sign {
+  transform: translateY(-3.5px);
+}
+
 .quantity {
   font-weight: 500;
   font-size: 24px;

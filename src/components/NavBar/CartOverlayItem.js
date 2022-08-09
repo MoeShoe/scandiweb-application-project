@@ -79,6 +79,7 @@ class CartOverLayItem extends Component {
                             ? styles["swatch-attr-selected"]
                             : ""
                         }`}
+                        // style prop used for non constant css value
                         style={{ backgroundColor: itm.value }}
                         key={itm.id}
                       ></div>
@@ -98,8 +99,7 @@ class CartOverLayItem extends Component {
             <div className={styles["quantity"]}>{this.props.quantity}</div>
             <button onClick={this.onItemDecrement.bind(this)}>
               <div
-                className={styles["button-text"]}
-                style={{ transform: "translateY(-2px)" }}
+                className={`${styles["button-text"]} ${styles["decrement-sign"]}`}
               >
                 -
               </div>

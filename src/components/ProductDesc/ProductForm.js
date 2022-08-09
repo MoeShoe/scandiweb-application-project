@@ -109,6 +109,7 @@ class ProductForm extends Component {
                           ? styles["swatch-attr-selected"]
                           : ""
                       }`}
+                      // style prop used for non constant css value
                       style={{ backgroundColor: itm.value }}
                       onClick={this.attributeSelectClickHandler.bind(this, {
                         attrId: attr.id,

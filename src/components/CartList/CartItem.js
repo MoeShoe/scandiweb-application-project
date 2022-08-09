@@ -95,6 +95,7 @@ class CartItem extends Component {
                             ? styles["swatch-attr-selected"]
                             : ""
                         }`}
+                        // style prop used for non constant css value
                         style={{ backgroundColor: itm.value }}
                         key={itm.id}
                       ></div>
@@ -114,7 +115,7 @@ class CartItem extends Component {
             </button>
             <div className={styles["quantity"]}>{this.props.quantity}</div>
             <button onClick={this.itemDecrementHandler.bind(this)}>
-              <span style={{ transform: "translateY(-3.5px)" }}>-</span>
+              <span className={styles["decrement-sign"]}>-</span>
             </button>
           </div>
 
