@@ -1,3 +1,6 @@
+# My second attempt at the assignment and what i learned
+Before I begin, i would like to thank you once more. This time for pointing out the shortcomings of my previous attempt at the assignment, pushing me towards the best coding practices, giving me the chance to be here again and taking the time to review this project once more, I really appreciate it. I hope that I have addressed the issues pointed in your review appropriately. Anyhow, this whole experience has broadened my prospects as a developer.
+
 ## feedback/ learning points about my submission:
 
 **1- Please remove custom scrollbars and don't crop the page content.**
@@ -41,7 +44,7 @@ This has opened my eyes to a whole new set of security concerns mainly XSS attac
 
 Done!
 
-¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬Previous README.md¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬
+## previous readme.md 
 
 # Moussa Sahli's test project for the application to Scandiweb's React.js Developer position 
 * first of all, thank you for considering me for this position, giving me the chance to have this experience and for taking the time to review this project and mentor me. No matter what your final decision would be, I will come out a winner at the end of it all by improving as a web developer.
@@ -55,5 +58,3 @@ Done!
 * Graphql server must be hosted on port 4000 for the app to work. 
 * It took me around a week to finish this project.
 
-# My second attempt at the assignment and what i learned
-Before I begin, i would like to thank you once more. This time for pointing out the shortcomings of my previous attempt at the assignment, pushing me towards the best coding practices, giving me the chance to be here again and taking the time to review this project once more, I really appreciate it. I hope that I have addressed the issues pointed in your review appropriately. Anyhow, this whole experience has broadened my prospects as a developer.
