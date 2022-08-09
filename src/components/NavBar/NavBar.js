@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import styles from "./NavBar.module.css";
 import CurrencyOverlay from "./CurrencyOverlay";
@@ -13,11 +13,26 @@ import { cartActions } from "../../store/cart-slice/cart-slice";
 import { uiActions } from "../../store/ui-slice/ui-slice";
 
 class NavBar extends Component {
-  setCategory(category) {
-    //Guard Clause
-    if (category === this.props.currentCategory) return;
+  componentDidMount() {
+    // gets the specified category in the search params
+    const categorySearchParam = new URLSearchParams(
+      this.props.location.search
+    ).get("category");
 
+    // and applies it
+    categorySearchParam && this.props.setCategory(categorySearchParam);
+  }
+
+  setCategory(category) {
     this.props.setCategory(category);
+
+    // sets query paramters for category
+    if (category !== "all") {
+      this.props.history.push(`/?category=${category}`);
+      return;
+    }
+
+    this.props.history.push("/");
   }
 
   currencyClickHandler(e) {
@@ -63,7 +78,7 @@ class NavBar extends Component {
           className={`${styles["container"]} ${styles["categories-container"]}`}
         >
           {this.props.listOfCategories.map((cat) => (
-            <Link
+            <div
               to="/"
               className={`${styles["category"]} ${
                 this.props.currentCategory === cat.name &&
@@ -73,7 +88,7 @@ class NavBar extends Component {
               key={cat.name}
             >
               {cat.name.toUpperCase()}
-            </Link>
+            </div>
           ))}
         </div>
 
@@ -81,9 +96,9 @@ class NavBar extends Component {
         <div
           className={`${styles["container"]} ${styles["web-app-logo-container"]}`}
         >
-          <Link to="/">
+          <div to="/">
             <Logo />
-          </Link>
+          </div>
         </div>
 
         {/* Actions */}
@@ -191,4 +206,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));
