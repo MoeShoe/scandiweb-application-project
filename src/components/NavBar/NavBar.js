@@ -102,7 +102,7 @@ class NavBar extends Component {
         <div
           className={`${styles["container"]} ${styles["web-app-logo-container"]}`}
         >
-          <Link to="/" onClick={() => this.props.setCategory("all")}>
+          <Link to="/">
             <Logo />
           </Link>
         </div>
