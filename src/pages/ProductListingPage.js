@@ -73,6 +73,10 @@ class ProductListingPage extends Component {
     const products =
       this.props.category?.name === "all"
         ? this.props.products
+            ?.slice()
+            /* personally i wanted the products to be sorted based on category alphabatically
+             because sometimes categories get fetched in different order */
+            ?.sort((a, b) => (a.category > b.category ? 1 : -1))
         : this.props.products.filter(
             (pro) => pro.category === this.props.category?.name
           );
