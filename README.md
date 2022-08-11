@@ -1,5 +1,14 @@
-# My second attempt at the assignment and what i learned
-Before I begin, i would like to thank you once more. This time for pointing out the shortcomings of my previous attempt at the assignment, pushing me towards the best coding practices, giving me the chance to be here again and taking the time to review this project once more, I really appreciate it. I hope that I have addressed the issues pointed in your review appropriately. Anyhow, this whole experience has broadened my prospects as a developer.
+# Third reevaluation of the assignment
+I am once again glad to be here :)
+## feedback/ learning points about your submission:
+
+**Don't fetch all products for all categories. Fetch products for the current category only.**
+
+Getting this to work was more challenging than I anticipated. I had to improve and edit the architecture of the logic handling API calls, but in the end I made it work as requested.
+
+## previous readme.md 
+# My second attempt at the assignment and what I learned
+Before I begin, I would like to thank you once more. This time for pointing out the shortcomings of my previous attempt at the assignment, pushing me towards the best coding practices, giving me the chance to be here again and taking the time to review this project once more, I really appreciate it. I hope that I have addressed the issues pointed in your review appropriately. Anyhow, this whole experience has broadened my prospects as a developer.
 
 ## feedback/ learning points about my submission:
 
