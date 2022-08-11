@@ -4,7 +4,7 @@ I am once again glad to be here and grateful for the attention and time you put 
 
 **Don't fetch all products for all categories. Fetch products for the current category only.**
 
-Getting this to work was more challenging than I anticipated. I had to improve and edit the architecture of the logic handling API calls, but in the end I made it work as requested.
+Getting this to work was more challenging than I anticipated. I had to improve and edit the architecture of the logic handling API calls and i did so in a matter that is scalable. If in the future we add more categories or products the same code will work (case this was an IRL project).
 
 ## previous readme.md 
 # My second attempt at the assignment and what I learned
