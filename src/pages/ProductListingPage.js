@@ -9,6 +9,24 @@ import { cartActions } from "../store/cart-slice/cart-slice";
 import { productListActions } from "../store/product-list-slice/product-list-slice";
 
 class ProductListingPage extends Component {
+  componentDidMount() {
+    // gets the specified category in the search params
+    const categorySearchParam =
+      new URLSearchParams(this.props.location.search).get("category") || "all";
+
+    const targetFetchedCategory = this.props.listOfCategories.find(
+      (cat) => cat.name === categorySearchParam
+    );
+
+    // and applies it
+    this.props.setCategory(
+      targetFetchedCategory || {
+        name: categorySearchParam,
+        hasBeenFetched: false,
+      }
+    );
+  }
+
   componentDidUpdate() {
     // will fetch product list if it wasn't fetched from before
     if (

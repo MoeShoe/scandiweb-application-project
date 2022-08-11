@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import styles from "./NavBar.module.css";
 import CurrencyOverlay from "./CurrencyOverlay";
@@ -13,20 +13,6 @@ import { cartActions } from "../../store/cart-slice/cart-slice";
 import { uiActions } from "../../store/ui-slice/ui-slice";
 
 class NavBar extends Component {
-  componentDidMount() {
-    // it made sense to put this in the navbar where categories are selected
-
-    // gets the specified category in the search params
-    const categorySearchParam =
-      new URLSearchParams(this.props.location.search).get("category") || "all";
-
-    // and applies it
-    this.props.setCategory({
-      name: categorySearchParam,
-      hasBeenFetched: false,
-    });
-  }
-
   setCategory(category) {
     // sets the clicked category
     this.props.setCategory({
@@ -102,9 +88,13 @@ class NavBar extends Component {
         <div
           className={`${styles["container"]} ${styles["web-app-logo-container"]}`}
         >
-          <Link to="/">
+          <div
+            onClick={() => {
+              this.setCategory(this.props.currentCategory || "all");
+            }}
+          >
             <Logo />
-          </Link>
+          </div>
         </div>
 
         {/* Actions */}
