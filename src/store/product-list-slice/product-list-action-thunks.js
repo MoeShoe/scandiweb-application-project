@@ -27,9 +27,6 @@ const initializeProductPage = () => async (dispatch) => {
 
     const data = await request(API_ENDPOINT, query);
 
-    // fulfills the page initilization promise
-    pageHasBeenInitialized();
-
     // sets all available categories and currencies, so nothing is hardcoded and the app is scalable
     dispatch(
       productListActions.initializeProductList({
@@ -40,6 +37,9 @@ const initializeProductPage = () => async (dispatch) => {
         currencies: data.currencies,
       })
     );
+
+    // fulfills the page initilization promise
+    pageHasBeenInitialized();
   } catch (err) {
     /* very basic error handling without reflecting error state to 
     the UI because it wasn't required in the assignment */
@@ -52,37 +52,45 @@ const fetchProductList = (category) => async (dispatch) => {
     // waits for the page to be initialized before doing any other API calls
     await pageHasBeenInitialized;
 
-    const query = gql`
-      {
-        category(input: { title: "${category}" }) {
-          products {
-            category
-            name
-            brand
-            id
-            prices {
-              currency {
-                label
-                symbol
-              }
-              amount
-            }
-            gallery
-            inStock
-            attributes {
-              name
-              type
-              items {
-                displayValue
-                value
+    // constructs the template literal for the query from the inputted array
+    const queryTemplateLiteral = category.subCategories.reduce(
+      (acc, cat) =>
+        acc.concat(`
+          {
+            ${cat} : category(input: { title: "${cat}" }) {
+              products {
+                category
+                name
+                brand
                 id
+                prices {
+                  currency {
+                    label
+                    symbol
+                  }
+                  amount
+                }
+                gallery
+                inStock
+                attributes {
+                  name
+                  type
+                  items {
+                    displayValue
+                    value
+                    id
+                  }
+                  id
+                }
+                description
               }
-              id
             }
-            description
-          }
-        }
-      }
+          }`),
+      ""
+    );
+
+    const query = gql`
+      ${queryTemplateLiteral}
     `;
 
     const data = await request(API_ENDPOINT, query);
@@ -90,8 +98,13 @@ const fetchProductList = (category) => async (dispatch) => {
     // sets all available products
     dispatch(
       productListActions.addToProductList({
-        category,
-        products: data.category.products,
+        category: category.mainCategory,
+        /* implemented in this manner to improve scalablity.
+         in case we had 3 categories or more instead, this would still work */
+        products: Object.values(data).reduce(
+          (acc, cat) => [...acc, ...cat.products],
+          []
+        ),
       })
     );
   } catch (err) {

@@ -16,12 +16,30 @@ class ProductListingPage extends Component {
       this.props.category &&
       !this.props.category?.hasBeenFetched
     ) {
-      this.props.setCategory({
-        name: this.props.category.name,
-        hasBeenFetched: true,
+      let subCategories;
+      if (
+        this.props.category.name === "all" &&
+        this.props.listOfCategories?.some((cat) => cat.hasBeenFetched)
+      )
+        // in case we fetch all after fetching some other categories before
+        subCategories = [
+          ...this.props.listOfCategories
+            .filter((cat) => !cat.hasBeenFetched && cat.name !== "all")
+            .map((cat) => cat.name),
+        ];
+      else subCategories = [this.props.category?.name]; // fetching a regular category with no subcategories
+
+      // dispatches the action that fetches the category's products
+      this.props.getProductList({
+        mainCategory: this.props.category?.name, // the name of the category
+        subCategories, // in case the category includes other categories like "all"
       });
 
-      this.props.getProductList(this.props.category?.name);
+      // updates the selected category fetch state
+      this.props.setCategory({
+        ...this.props.category,
+        hasBeenFetched: true,
+      });
     }
   }
 
@@ -56,6 +74,7 @@ class ProductListingPage extends Component {
 const mapStateToProps = (state) => ({
   products: state.productList.products,
   category: state.productList.category.currentCategory,
+  listOfCategories: state.productList.category.listOfCategories,
   hasFetchedAll: state.productList.category.listOfCategories.find(
     (cat) => cat.name === "all"
   )?.hasBeenFetched,
