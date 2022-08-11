@@ -1,5 +1,5 @@
 # Third reevaluation of the assignment
-I am once again glad to be here.
+I am once again glad to be here and grateful for the attention and time you put in guiding me through this journey, thank you so much.
 ## feedback/ learning points about your submission:
 
 **Don't fetch all products for all categories. Fetch products for the current category only.**
