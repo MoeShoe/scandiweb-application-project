@@ -6,11 +6,23 @@ import ProductList from "../components/ProductList/ProductList";
 
 import { fetchProductList } from "../store/product-list-slice/product-list-action-thunks";
 import { cartActions } from "../store/cart-slice/cart-slice";
+import { productListActions } from "../store/product-list-slice/product-list-slice";
 
 class ProductListingPage extends Component {
-  componentDidMount() {
+  componentDidUpdate() {
     // will fetch product list if it wasn't fetched from before
-    if (this.props.products.length === 0) this.props.getProductList();
+    if (
+      !this.props.hasFetchedAll &&
+      this.props.category &&
+      !this.props.category?.hasBeenFetched
+    ) {
+      this.props.setCategory({
+        name: this.props.category.name,
+        hasBeenFetched: true,
+      });
+
+      this.props.getProductList(this.props.category?.name);
+    }
   }
 
   addProductToCart(productId, addToCart) {
@@ -23,15 +35,16 @@ class ProductListingPage extends Component {
 
   render() {
     const products =
-      this.props.category === "all"
+      this.props.category?.name === "all"
         ? this.props.products
         : this.props.products.filter(
-            (pro) => pro.category === this.props.category
+            (pro) => pro.category === this.props.category?.name
           );
+
     return (
       <ProductList
         products={products}
-        category={this.props.category}
+        category={this.props.category?.name}
         currency={this.props.currency}
         addProductHandler={this.addProductToCart.bind(this)}
         productClickHandler={this.productClickHandler.bind(this)}
@@ -43,12 +56,19 @@ class ProductListingPage extends Component {
 const mapStateToProps = (state) => ({
   products: state.productList.products,
   category: state.productList.category.currentCategory,
+  hasFetchedAll: state.productList.category.listOfCategories.find(
+    (cat) => cat.name === "all"
+  )?.hasBeenFetched,
   currency: state.productList.currency.currentCurrency,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getProductList() {
-    dispatch(fetchProductList());
+  setCategory(category) {
+    dispatch(productListActions.setCategory(category));
+  },
+
+  getProductList(category) {
+    dispatch(fetchProductList(category));
   },
 
   addProductToCart(product) {

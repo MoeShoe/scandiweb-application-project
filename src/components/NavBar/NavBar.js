@@ -14,17 +14,24 @@ import { uiActions } from "../../store/ui-slice/ui-slice";
 
 class NavBar extends Component {
   componentDidMount() {
+    // it made sense to put this in the navbar where categories are selected
+
     // gets the specified category in the search params
-    const categorySearchParam = new URLSearchParams(
-      this.props.location.search
-    ).get("category");
+    const categorySearchParam =
+      new URLSearchParams(this.props.location.search).get("category") || "all";
 
     // and applies it
-    categorySearchParam && this.props.setCategory(categorySearchParam);
+    this.props.setCategory({
+      name: categorySearchParam,
+      hasBeenFetched: false,
+    });
   }
 
   setCategory(category) {
-    this.props.setCategory(category);
+    // sets the clicked category
+    this.props.setCategory({
+      ...this.props.listOfCategories.find((cat) => cat.name === category),
+    });
 
     // sets query paramters for category
     if (category !== "all") {
@@ -163,7 +170,7 @@ class NavBar extends Component {
 
 const mapStateToProps = (state) => ({
   // categories state
-  currentCategory: state.productList.category.currentCategory,
+  currentCategory: state.productList.category.currentCategory.name,
   listOfCategories: state.productList.category.listOfCategories,
   //currencies state
   currentCurrency: state.productList.currency.currentCurrency,

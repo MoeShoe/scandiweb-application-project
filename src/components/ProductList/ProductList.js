@@ -13,7 +13,8 @@ class ProductList extends Component {
       <div className={styles["product-list-container"]}>
         {/* Current category name */}
         <div className={styles["category-name"]}>
-          {this.props.category[0]
+          {this.props.category
+            ?.at(0)
             ?.toUpperCase()
             ?.concat(this.props.category?.slice(1))}
         </div>
